@@ -48,12 +48,12 @@ class _DeliveryRepository implements DeliveryRepository {
   }
 
   @override
-  Future<dynamic> writeAll(List<Delivery> values) async {
+  Future<List<Delivery>> writeAll(List<Delivery> values) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = values.map((e) => e.toJson()).toList();
-    final _options = _setStreamType<dynamic>(
+    final _options = _setStreamType<List<Delivery>>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -63,8 +63,16 @@ class _DeliveryRepository implements DeliveryRepository {
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch(_options);
-    final _value = _result.data;
+    final _result = await _dio.fetch<List<dynamic>>(_options);
+    late List<Delivery> _value;
+    try {
+      _value = _result.data!
+          .map((dynamic i) => Delivery.fromJson(i as Map<String, dynamic>))
+          .toList();
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
     return _value;
   }
 
@@ -75,7 +83,7 @@ class _DeliveryRepository implements DeliveryRepository {
     String? customerId,
     required DateTime fromDate,
     required DateTime toDate,
-    DeliveryStatus? status,
+    String? status,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{

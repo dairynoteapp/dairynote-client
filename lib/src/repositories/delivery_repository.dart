@@ -14,7 +14,7 @@ abstract class DeliveryRepository {
   Future<Delivery> write(@Body() Delivery delivery);
 
   @POST('/deliveries/bulk')
-  Future<dynamic> writeAll(@Body() List<Delivery> values); // Node.js returns a bulk result summary
+  Future<List<Delivery>> writeAll(@Body() List<Delivery> values); // Node.js returns a bulk result summary
 
   @GET('/deliveries')
   Future<List<Delivery>> list({
@@ -23,7 +23,7 @@ abstract class DeliveryRepository {
     @Query('customerId') String? customerId,
     @Query('fromDate') required DateTime fromDate,
     @Query('toDate') required DateTime toDate,
-    @Query('status') DeliveryStatus? status,
+    @Query('status') String? status,
   });
 
   @POST('/deliveries/by-ids')

@@ -147,6 +147,17 @@ class ItemMapConverter
   }
 }
 
+
+class DateTimeConverter implements JsonConverter<DateTime, String> {
+  const DateTimeConverter();
+
+  @override
+  DateTime fromJson(String json) => DateTime.parse(json).toLocal();
+
+  @override
+  String toJson(DateTime object) => object.toUtc().toIso8601String();
+}
+
 @freezed
 abstract class AuthenticationResponse with _$AuthenticationResponse {
   const factory AuthenticationResponse({
@@ -175,9 +186,12 @@ abstract class CollectionEntry with _$CollectionEntry {
     required double rate,
     required double quantity,
     required double total,
+    @DateTimeConverter()
     required DateTime collectedAt,
     @Default(false) bool locked,
+    @DateTimeConverter()
     required DateTime createdAt,
+    @DateTimeConverter()
     DateTime? updatedAt,
   }) = _CollectionEntry;
 
@@ -195,7 +209,9 @@ abstract class Collection with _$Collection {
     required Item item,
     required RateType rateType,
     double? rate,
+    @DateTimeConverter()
     required DateTime createdAt,
+    @DateTimeConverter()
     DateTime? updatedAt,
   }) = _Collection;
 
@@ -240,10 +256,13 @@ abstract class Delivery with _$Delivery {
     required double price,
     required double quantity,
     required double total,
+    @DateTimeConverter()
     required DateTime deliveredAt,
     @Default(DeliveryStatus.pending) DeliveryStatus status,
     required bool locked,
+    @DateTimeConverter()
     required DateTime createdAt,
+    @DateTimeConverter()
     DateTime? updatedAt,
   }) = _Delivery;
 
@@ -260,9 +279,12 @@ abstract class Dispatch with _$Dispatch {
     required String supplierId,
     @ItemMapConverter()
     required Map<Item, double> items, // Use converter for Item keys
+    @DateTimeConverter()
     required DateTime dispatchedAt,
     @Default(DispatchStatus.pending) DispatchStatus status,
+    @DateTimeConverter()
     required DateTime createdAt,
+    @DateTimeConverter()
     DateTime? updatedAt,
   }) = _Dispatch;
 
@@ -278,12 +300,16 @@ abstract class FarmerPayment with _$FarmerPayment {
     required String sellerId,
     required String farmerId,
     required double total,
+    @DateTimeConverter()
     required DateTime from,
+    @DateTimeConverter()
     required DateTime to,
     required List<String> collectionIds, // List<String> is List<String>
     required String createdBy,
     String? updatedBy,
+    @DateTimeConverter()
     required DateTime createdAt,
+    @DateTimeConverter()
     DateTime? updatedAt,
   }) = _FarmerPayment;
 
@@ -313,7 +339,9 @@ abstract class Invoice with _$Invoice {
     required String customerId,
     String? supplierId,
     required double total,
+    @DateTimeConverter()
     required DateTime from,
+    @DateTimeConverter()
     required DateTime to,
     @Default(0) double paid,
     @Default(0) double pending,
@@ -321,7 +349,9 @@ abstract class Invoice with _$Invoice {
     required List<String> deliveryIds, // List<String> is List<String>
     required String createdBy,
     String? updatedBy,
+    @DateTimeConverter()
     required DateTime createdAt,
+    @DateTimeConverter()
     DateTime? updatedAt,
   }) = _Invoice;
 
@@ -337,7 +367,9 @@ abstract class Pricing with _$Pricing {
     required String sellerId,
     required Item item,
     required double price,
+    @DateTimeConverter()
     required DateTime createdAt,
+    @DateTimeConverter()
     DateTime? updatedAt,
   }) = _Pricing;
 
@@ -368,7 +400,9 @@ abstract class RateChart with _$RateChart {
     List<RateChartStep>? snfSteps,
     required Map<String, Map<String, double>>
     data, // Map<String,Map<String,double>>
+    @DateTimeConverter()
     required DateTime createdAt,
+    @DateTimeConverter()
     DateTime? updatedAt,
   }) = _RateChart;
 
@@ -387,7 +421,9 @@ abstract class Sale with _$Sale {
     required double price,
     required double quantity,
     required double total,
+    @DateTimeConverter()
     required DateTime soldAt,
+    @DateTimeConverter()
     required DateTime createdAt,
     DateTime? updatedAt,
   }) = _Sale;
@@ -417,8 +453,11 @@ abstract class SuReturn with _$SuReturn {
     required String supplierId,
     @ItemMapConverter()
     required Map<Item, double> items, // Use converter for Item keys
+    @DateTimeConverter()
     required DateTime returnedAt,
+    @DateTimeConverter()
     required DateTime createdAt,
+    @DateTimeConverter()
     DateTime? updatedAt,
   }) = _SuReturn;
 
@@ -435,7 +474,9 @@ abstract class Subscription with _$Subscription {
     required Unit unit,
     required String pricingId, // String is String
     required bool active,
+    @DateTimeConverter()
     required DateTime createdAt,
+    @DateTimeConverter()
     DateTime? updatedAt,
   }) = _Subscription;
 
@@ -452,7 +493,9 @@ abstract class SupplierDay with _$SupplierDay {
     required String supplierId,
     required bool freez,
     DateTime? startedAt,
+    @DateTimeConverter()
     required DateTime createdAt,
+    @DateTimeConverter()
     DateTime? updatedAt,
   }) = _SupplierDay;
 
@@ -519,6 +562,7 @@ abstract class User with _$User {
     SellerSettings? seSettings,
     SupplierSettings? suSettings,
     @Default(true) bool active,
+    @DateTimeConverter()
     required DateTime createdAt,
     DateTime? updatedAt,
   }) = _User;
@@ -538,7 +582,9 @@ abstract class WalletTransaction with _$WalletTransaction {
     String? note,
     required String createdBy,
     String? updatedBy,
+    @DateTimeConverter()
     required DateTime createdAt,
+    @DateTimeConverter()
     DateTime? updatedAt,
   }) = _WalletTransaction;
 

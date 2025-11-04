@@ -300,7 +300,7 @@ $UserInfoCopyWith<$Res> get userInfo {
 mixin _$CollectionEntry {
 
 @JsonKey(name: '_id', includeIfNull: false) String? get id;// String with defaultPersist: random
- String get sellerId; String get farmerId; Item get item; Period get period; double get fat; double? get snf; double? get fatRate; double get rate; double get quantity; double get total; DateTime get collectedAt; bool get locked; DateTime get createdAt; DateTime? get updatedAt;
+ String get sellerId; String get farmerId; Item get item; Period get period; double get fat; double? get snf; double? get fatRate; double get rate; double get quantity; double get total;@DateTimeConverter() DateTime get collectedAt; bool get locked;@DateTimeConverter() DateTime get createdAt;@DateTimeConverter() DateTime? get updatedAt;
 /// Create a copy of CollectionEntry
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -333,7 +333,7 @@ abstract mixin class $CollectionEntryCopyWith<$Res>  {
   factory $CollectionEntryCopyWith(CollectionEntry value, $Res Function(CollectionEntry) _then) = _$CollectionEntryCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, String farmerId, Item item, Period period, double fat, double? snf, double? fatRate, double rate, double quantity, double total, DateTime collectedAt, bool locked, DateTime createdAt, DateTime? updatedAt
+@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, String farmerId, Item item, Period period, double fat, double? snf, double? fatRate, double rate, double quantity, double total,@DateTimeConverter() DateTime collectedAt, bool locked,@DateTimeConverter() DateTime createdAt,@DateTimeConverter() DateTime? updatedAt
 });
 
 
@@ -452,7 +452,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String farmerId,  Item item,  Period period,  double fat,  double? snf,  double? fatRate,  double rate,  double quantity,  double total,  DateTime collectedAt,  bool locked,  DateTime createdAt,  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String farmerId,  Item item,  Period period,  double fat,  double? snf,  double? fatRate,  double rate,  double quantity,  double total, @DateTimeConverter()  DateTime collectedAt,  bool locked, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CollectionEntry() when $default != null:
 return $default(_that.id,_that.sellerId,_that.farmerId,_that.item,_that.period,_that.fat,_that.snf,_that.fatRate,_that.rate,_that.quantity,_that.total,_that.collectedAt,_that.locked,_that.createdAt,_that.updatedAt);case _:
@@ -473,7 +473,7 @@ return $default(_that.id,_that.sellerId,_that.farmerId,_that.item,_that.period,_
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String farmerId,  Item item,  Period period,  double fat,  double? snf,  double? fatRate,  double rate,  double quantity,  double total,  DateTime collectedAt,  bool locked,  DateTime createdAt,  DateTime? updatedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String farmerId,  Item item,  Period period,  double fat,  double? snf,  double? fatRate,  double rate,  double quantity,  double total, @DateTimeConverter()  DateTime collectedAt,  bool locked, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)  $default,) {final _that = this;
 switch (_that) {
 case _CollectionEntry():
 return $default(_that.id,_that.sellerId,_that.farmerId,_that.item,_that.period,_that.fat,_that.snf,_that.fatRate,_that.rate,_that.quantity,_that.total,_that.collectedAt,_that.locked,_that.createdAt,_that.updatedAt);case _:
@@ -493,7 +493,7 @@ return $default(_that.id,_that.sellerId,_that.farmerId,_that.item,_that.period,_
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String farmerId,  Item item,  Period period,  double fat,  double? snf,  double? fatRate,  double rate,  double quantity,  double total,  DateTime collectedAt,  bool locked,  DateTime createdAt,  DateTime? updatedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String farmerId,  Item item,  Period period,  double fat,  double? snf,  double? fatRate,  double rate,  double quantity,  double total, @DateTimeConverter()  DateTime collectedAt,  bool locked, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)?  $default,) {final _that = this;
 switch (_that) {
 case _CollectionEntry() when $default != null:
 return $default(_that.id,_that.sellerId,_that.farmerId,_that.item,_that.period,_that.fat,_that.snf,_that.fatRate,_that.rate,_that.quantity,_that.total,_that.collectedAt,_that.locked,_that.createdAt,_that.updatedAt);case _:
@@ -508,7 +508,7 @@ return $default(_that.id,_that.sellerId,_that.farmerId,_that.item,_that.period,_
 @JsonSerializable()
 
 class _CollectionEntry implements CollectionEntry {
-  const _CollectionEntry({@JsonKey(name: '_id', includeIfNull: false) this.id, required this.sellerId, required this.farmerId, required this.item, required this.period, required this.fat, this.snf, this.fatRate, required this.rate, required this.quantity, required this.total, required this.collectedAt, this.locked = false, required this.createdAt, this.updatedAt});
+  const _CollectionEntry({@JsonKey(name: '_id', includeIfNull: false) this.id, required this.sellerId, required this.farmerId, required this.item, required this.period, required this.fat, this.snf, this.fatRate, required this.rate, required this.quantity, required this.total, @DateTimeConverter() required this.collectedAt, this.locked = false, @DateTimeConverter() required this.createdAt, @DateTimeConverter() this.updatedAt});
   factory _CollectionEntry.fromJson(Map<String, dynamic> json) => _$CollectionEntryFromJson(json);
 
 @override@JsonKey(name: '_id', includeIfNull: false) final  String? id;
@@ -523,10 +523,10 @@ class _CollectionEntry implements CollectionEntry {
 @override final  double rate;
 @override final  double quantity;
 @override final  double total;
-@override final  DateTime collectedAt;
+@override@DateTimeConverter() final  DateTime collectedAt;
 @override@JsonKey() final  bool locked;
-@override final  DateTime createdAt;
-@override final  DateTime? updatedAt;
+@override@DateTimeConverter() final  DateTime createdAt;
+@override@DateTimeConverter() final  DateTime? updatedAt;
 
 /// Create a copy of CollectionEntry
 /// with the given fields replaced by the non-null parameter values.
@@ -561,7 +561,7 @@ abstract mixin class _$CollectionEntryCopyWith<$Res> implements $CollectionEntry
   factory _$CollectionEntryCopyWith(_CollectionEntry value, $Res Function(_CollectionEntry) _then) = __$CollectionEntryCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, String farmerId, Item item, Period period, double fat, double? snf, double? fatRate, double rate, double quantity, double total, DateTime collectedAt, bool locked, DateTime createdAt, DateTime? updatedAt
+@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, String farmerId, Item item, Period period, double fat, double? snf, double? fatRate, double rate, double quantity, double total,@DateTimeConverter() DateTime collectedAt, bool locked,@DateTimeConverter() DateTime createdAt,@DateTimeConverter() DateTime? updatedAt
 });
 
 
@@ -606,7 +606,7 @@ as DateTime?,
 /// @nodoc
 mixin _$Collection {
 
- Item get item; RateType get rateType; double? get rate; DateTime get createdAt; DateTime? get updatedAt;
+ Item get item; RateType get rateType; double? get rate;@DateTimeConverter() DateTime get createdAt;@DateTimeConverter() DateTime? get updatedAt;
 /// Create a copy of Collection
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -639,7 +639,7 @@ abstract mixin class $CollectionCopyWith<$Res>  {
   factory $CollectionCopyWith(Collection value, $Res Function(Collection) _then) = _$CollectionCopyWithImpl;
 @useResult
 $Res call({
- Item item, RateType rateType, double? rate, DateTime createdAt, DateTime? updatedAt
+ Item item, RateType rateType, double? rate,@DateTimeConverter() DateTime createdAt,@DateTimeConverter() DateTime? updatedAt
 });
 
 
@@ -748,7 +748,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Item item,  RateType rateType,  double? rate,  DateTime createdAt,  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Item item,  RateType rateType,  double? rate, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Collection() when $default != null:
 return $default(_that.item,_that.rateType,_that.rate,_that.createdAt,_that.updatedAt);case _:
@@ -769,7 +769,7 @@ return $default(_that.item,_that.rateType,_that.rate,_that.createdAt,_that.updat
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Item item,  RateType rateType,  double? rate,  DateTime createdAt,  DateTime? updatedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Item item,  RateType rateType,  double? rate, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)  $default,) {final _that = this;
 switch (_that) {
 case _Collection():
 return $default(_that.item,_that.rateType,_that.rate,_that.createdAt,_that.updatedAt);case _:
@@ -789,7 +789,7 @@ return $default(_that.item,_that.rateType,_that.rate,_that.createdAt,_that.updat
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Item item,  RateType rateType,  double? rate,  DateTime createdAt,  DateTime? updatedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Item item,  RateType rateType,  double? rate, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)?  $default,) {final _that = this;
 switch (_that) {
 case _Collection() when $default != null:
 return $default(_that.item,_that.rateType,_that.rate,_that.createdAt,_that.updatedAt);case _:
@@ -804,14 +804,14 @@ return $default(_that.item,_that.rateType,_that.rate,_that.createdAt,_that.updat
 @JsonSerializable()
 
 class _Collection implements Collection {
-  const _Collection({required this.item, required this.rateType, this.rate, required this.createdAt, this.updatedAt});
+  const _Collection({required this.item, required this.rateType, this.rate, @DateTimeConverter() required this.createdAt, @DateTimeConverter() this.updatedAt});
   factory _Collection.fromJson(Map<String, dynamic> json) => _$CollectionFromJson(json);
 
 @override final  Item item;
 @override final  RateType rateType;
 @override final  double? rate;
-@override final  DateTime createdAt;
-@override final  DateTime? updatedAt;
+@override@DateTimeConverter() final  DateTime createdAt;
+@override@DateTimeConverter() final  DateTime? updatedAt;
 
 /// Create a copy of Collection
 /// with the given fields replaced by the non-null parameter values.
@@ -846,7 +846,7 @@ abstract mixin class _$CollectionCopyWith<$Res> implements $CollectionCopyWith<$
   factory _$CollectionCopyWith(_Collection value, $Res Function(_Collection) _then) = __$CollectionCopyWithImpl;
 @override @useResult
 $Res call({
- Item item, RateType rateType, double? rate, DateTime createdAt, DateTime? updatedAt
+ Item item, RateType rateType, double? rate,@DateTimeConverter() DateTime createdAt,@DateTimeConverter() DateTime? updatedAt
 });
 
 
@@ -1183,7 +1183,7 @@ as DateTime?,
 /// @nodoc
 mixin _$Delivery {
 
-@JsonKey(name: '_id', includeIfNull: false) String? get id; String get sellerId; String get supplierId; String get customerId; Item get item; double get price; double get quantity; double get total; DateTime get deliveredAt; DeliveryStatus get status; bool get locked; DateTime get createdAt; DateTime? get updatedAt;
+@JsonKey(name: '_id', includeIfNull: false) String? get id; String get sellerId; String get supplierId; String get customerId; Item get item; double get price; double get quantity; double get total;@DateTimeConverter() DateTime get deliveredAt; DeliveryStatus get status; bool get locked;@DateTimeConverter() DateTime get createdAt;@DateTimeConverter() DateTime? get updatedAt;
 /// Create a copy of Delivery
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1216,7 +1216,7 @@ abstract mixin class $DeliveryCopyWith<$Res>  {
   factory $DeliveryCopyWith(Delivery value, $Res Function(Delivery) _then) = _$DeliveryCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, String supplierId, String customerId, Item item, double price, double quantity, double total, DateTime deliveredAt, DeliveryStatus status, bool locked, DateTime createdAt, DateTime? updatedAt
+@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, String supplierId, String customerId, Item item, double price, double quantity, double total,@DateTimeConverter() DateTime deliveredAt, DeliveryStatus status, bool locked,@DateTimeConverter() DateTime createdAt,@DateTimeConverter() DateTime? updatedAt
 });
 
 
@@ -1333,7 +1333,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String supplierId,  String customerId,  Item item,  double price,  double quantity,  double total,  DateTime deliveredAt,  DeliveryStatus status,  bool locked,  DateTime createdAt,  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String supplierId,  String customerId,  Item item,  double price,  double quantity,  double total, @DateTimeConverter()  DateTime deliveredAt,  DeliveryStatus status,  bool locked, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Delivery() when $default != null:
 return $default(_that.id,_that.sellerId,_that.supplierId,_that.customerId,_that.item,_that.price,_that.quantity,_that.total,_that.deliveredAt,_that.status,_that.locked,_that.createdAt,_that.updatedAt);case _:
@@ -1354,7 +1354,7 @@ return $default(_that.id,_that.sellerId,_that.supplierId,_that.customerId,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String supplierId,  String customerId,  Item item,  double price,  double quantity,  double total,  DateTime deliveredAt,  DeliveryStatus status,  bool locked,  DateTime createdAt,  DateTime? updatedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String supplierId,  String customerId,  Item item,  double price,  double quantity,  double total, @DateTimeConverter()  DateTime deliveredAt,  DeliveryStatus status,  bool locked, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)  $default,) {final _that = this;
 switch (_that) {
 case _Delivery():
 return $default(_that.id,_that.sellerId,_that.supplierId,_that.customerId,_that.item,_that.price,_that.quantity,_that.total,_that.deliveredAt,_that.status,_that.locked,_that.createdAt,_that.updatedAt);case _:
@@ -1374,7 +1374,7 @@ return $default(_that.id,_that.sellerId,_that.supplierId,_that.customerId,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String supplierId,  String customerId,  Item item,  double price,  double quantity,  double total,  DateTime deliveredAt,  DeliveryStatus status,  bool locked,  DateTime createdAt,  DateTime? updatedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String supplierId,  String customerId,  Item item,  double price,  double quantity,  double total, @DateTimeConverter()  DateTime deliveredAt,  DeliveryStatus status,  bool locked, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)?  $default,) {final _that = this;
 switch (_that) {
 case _Delivery() when $default != null:
 return $default(_that.id,_that.sellerId,_that.supplierId,_that.customerId,_that.item,_that.price,_that.quantity,_that.total,_that.deliveredAt,_that.status,_that.locked,_that.createdAt,_that.updatedAt);case _:
@@ -1389,7 +1389,7 @@ return $default(_that.id,_that.sellerId,_that.supplierId,_that.customerId,_that.
 @JsonSerializable()
 
 class _Delivery implements Delivery {
-  const _Delivery({@JsonKey(name: '_id', includeIfNull: false) this.id, required this.sellerId, required this.supplierId, required this.customerId, required this.item, required this.price, required this.quantity, required this.total, required this.deliveredAt, this.status = DeliveryStatus.pending, required this.locked, required this.createdAt, this.updatedAt});
+  const _Delivery({@JsonKey(name: '_id', includeIfNull: false) this.id, required this.sellerId, required this.supplierId, required this.customerId, required this.item, required this.price, required this.quantity, required this.total, @DateTimeConverter() required this.deliveredAt, this.status = DeliveryStatus.pending, required this.locked, @DateTimeConverter() required this.createdAt, @DateTimeConverter() this.updatedAt});
   factory _Delivery.fromJson(Map<String, dynamic> json) => _$DeliveryFromJson(json);
 
 @override@JsonKey(name: '_id', includeIfNull: false) final  String? id;
@@ -1400,11 +1400,11 @@ class _Delivery implements Delivery {
 @override final  double price;
 @override final  double quantity;
 @override final  double total;
-@override final  DateTime deliveredAt;
+@override@DateTimeConverter() final  DateTime deliveredAt;
 @override@JsonKey() final  DeliveryStatus status;
 @override final  bool locked;
-@override final  DateTime createdAt;
-@override final  DateTime? updatedAt;
+@override@DateTimeConverter() final  DateTime createdAt;
+@override@DateTimeConverter() final  DateTime? updatedAt;
 
 /// Create a copy of Delivery
 /// with the given fields replaced by the non-null parameter values.
@@ -1439,7 +1439,7 @@ abstract mixin class _$DeliveryCopyWith<$Res> implements $DeliveryCopyWith<$Res>
   factory _$DeliveryCopyWith(_Delivery value, $Res Function(_Delivery) _then) = __$DeliveryCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, String supplierId, String customerId, Item item, double price, double quantity, double total, DateTime deliveredAt, DeliveryStatus status, bool locked, DateTime createdAt, DateTime? updatedAt
+@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, String supplierId, String customerId, Item item, double price, double quantity, double total,@DateTimeConverter() DateTime deliveredAt, DeliveryStatus status, bool locked,@DateTimeConverter() DateTime createdAt,@DateTimeConverter() DateTime? updatedAt
 });
 
 
@@ -1483,7 +1483,7 @@ as DateTime?,
 mixin _$Dispatch {
 
 @JsonKey(name: '_id', includeIfNull: false) String? get id; String get sellerId; String get supplierId;@ItemMapConverter() Map<Item, double> get items;// Use converter for Item keys
- DateTime get dispatchedAt; DispatchStatus get status; DateTime get createdAt; DateTime? get updatedAt;
+@DateTimeConverter() DateTime get dispatchedAt; DispatchStatus get status;@DateTimeConverter() DateTime get createdAt;@DateTimeConverter() DateTime? get updatedAt;
 /// Create a copy of Dispatch
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1516,7 +1516,7 @@ abstract mixin class $DispatchCopyWith<$Res>  {
   factory $DispatchCopyWith(Dispatch value, $Res Function(Dispatch) _then) = _$DispatchCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, String supplierId,@ItemMapConverter() Map<Item, double> items, DateTime dispatchedAt, DispatchStatus status, DateTime createdAt, DateTime? updatedAt
+@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, String supplierId,@ItemMapConverter() Map<Item, double> items,@DateTimeConverter() DateTime dispatchedAt, DispatchStatus status,@DateTimeConverter() DateTime createdAt,@DateTimeConverter() DateTime? updatedAt
 });
 
 
@@ -1628,7 +1628,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String supplierId, @ItemMapConverter()  Map<Item, double> items,  DateTime dispatchedAt,  DispatchStatus status,  DateTime createdAt,  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String supplierId, @ItemMapConverter()  Map<Item, double> items, @DateTimeConverter()  DateTime dispatchedAt,  DispatchStatus status, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Dispatch() when $default != null:
 return $default(_that.id,_that.sellerId,_that.supplierId,_that.items,_that.dispatchedAt,_that.status,_that.createdAt,_that.updatedAt);case _:
@@ -1649,7 +1649,7 @@ return $default(_that.id,_that.sellerId,_that.supplierId,_that.items,_that.dispa
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String supplierId, @ItemMapConverter()  Map<Item, double> items,  DateTime dispatchedAt,  DispatchStatus status,  DateTime createdAt,  DateTime? updatedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String supplierId, @ItemMapConverter()  Map<Item, double> items, @DateTimeConverter()  DateTime dispatchedAt,  DispatchStatus status, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)  $default,) {final _that = this;
 switch (_that) {
 case _Dispatch():
 return $default(_that.id,_that.sellerId,_that.supplierId,_that.items,_that.dispatchedAt,_that.status,_that.createdAt,_that.updatedAt);case _:
@@ -1669,7 +1669,7 @@ return $default(_that.id,_that.sellerId,_that.supplierId,_that.items,_that.dispa
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String supplierId, @ItemMapConverter()  Map<Item, double> items,  DateTime dispatchedAt,  DispatchStatus status,  DateTime createdAt,  DateTime? updatedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String supplierId, @ItemMapConverter()  Map<Item, double> items, @DateTimeConverter()  DateTime dispatchedAt,  DispatchStatus status, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)?  $default,) {final _that = this;
 switch (_that) {
 case _Dispatch() when $default != null:
 return $default(_that.id,_that.sellerId,_that.supplierId,_that.items,_that.dispatchedAt,_that.status,_that.createdAt,_that.updatedAt);case _:
@@ -1684,7 +1684,7 @@ return $default(_that.id,_that.sellerId,_that.supplierId,_that.items,_that.dispa
 @JsonSerializable()
 
 class _Dispatch implements Dispatch {
-  const _Dispatch({@JsonKey(name: '_id', includeIfNull: false) this.id, required this.sellerId, required this.supplierId, @ItemMapConverter() required final  Map<Item, double> items, required this.dispatchedAt, this.status = DispatchStatus.pending, required this.createdAt, this.updatedAt}): _items = items;
+  const _Dispatch({@JsonKey(name: '_id', includeIfNull: false) this.id, required this.sellerId, required this.supplierId, @ItemMapConverter() required final  Map<Item, double> items, @DateTimeConverter() required this.dispatchedAt, this.status = DispatchStatus.pending, @DateTimeConverter() required this.createdAt, @DateTimeConverter() this.updatedAt}): _items = items;
   factory _Dispatch.fromJson(Map<String, dynamic> json) => _$DispatchFromJson(json);
 
 @override@JsonKey(name: '_id', includeIfNull: false) final  String? id;
@@ -1698,10 +1698,10 @@ class _Dispatch implements Dispatch {
 }
 
 // Use converter for Item keys
-@override final  DateTime dispatchedAt;
+@override@DateTimeConverter() final  DateTime dispatchedAt;
 @override@JsonKey() final  DispatchStatus status;
-@override final  DateTime createdAt;
-@override final  DateTime? updatedAt;
+@override@DateTimeConverter() final  DateTime createdAt;
+@override@DateTimeConverter() final  DateTime? updatedAt;
 
 /// Create a copy of Dispatch
 /// with the given fields replaced by the non-null parameter values.
@@ -1736,7 +1736,7 @@ abstract mixin class _$DispatchCopyWith<$Res> implements $DispatchCopyWith<$Res>
   factory _$DispatchCopyWith(_Dispatch value, $Res Function(_Dispatch) _then) = __$DispatchCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, String supplierId,@ItemMapConverter() Map<Item, double> items, DateTime dispatchedAt, DispatchStatus status, DateTime createdAt, DateTime? updatedAt
+@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, String supplierId,@ItemMapConverter() Map<Item, double> items,@DateTimeConverter() DateTime dispatchedAt, DispatchStatus status,@DateTimeConverter() DateTime createdAt,@DateTimeConverter() DateTime? updatedAt
 });
 
 
@@ -1774,8 +1774,8 @@ as DateTime?,
 /// @nodoc
 mixin _$FarmerPayment {
 
-@JsonKey(name: '_id', includeIfNull: false) String? get id; String get sellerId; String get farmerId; double get total; DateTime get from; DateTime get to; List<String> get collectionIds;// List<String> is List<String>
- String get createdBy; String? get updatedBy; DateTime get createdAt; DateTime? get updatedAt;
+@JsonKey(name: '_id', includeIfNull: false) String? get id; String get sellerId; String get farmerId; double get total;@DateTimeConverter() DateTime get from;@DateTimeConverter() DateTime get to; List<String> get collectionIds;// List<String> is List<String>
+ String get createdBy; String? get updatedBy;@DateTimeConverter() DateTime get createdAt;@DateTimeConverter() DateTime? get updatedAt;
 /// Create a copy of FarmerPayment
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1808,7 +1808,7 @@ abstract mixin class $FarmerPaymentCopyWith<$Res>  {
   factory $FarmerPaymentCopyWith(FarmerPayment value, $Res Function(FarmerPayment) _then) = _$FarmerPaymentCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, String farmerId, double total, DateTime from, DateTime to, List<String> collectionIds, String createdBy, String? updatedBy, DateTime createdAt, DateTime? updatedAt
+@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, String farmerId, double total,@DateTimeConverter() DateTime from,@DateTimeConverter() DateTime to, List<String> collectionIds, String createdBy, String? updatedBy,@DateTimeConverter() DateTime createdAt,@DateTimeConverter() DateTime? updatedAt
 });
 
 
@@ -1923,7 +1923,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String farmerId,  double total,  DateTime from,  DateTime to,  List<String> collectionIds,  String createdBy,  String? updatedBy,  DateTime createdAt,  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String farmerId,  double total, @DateTimeConverter()  DateTime from, @DateTimeConverter()  DateTime to,  List<String> collectionIds,  String createdBy,  String? updatedBy, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _FarmerPayment() when $default != null:
 return $default(_that.id,_that.sellerId,_that.farmerId,_that.total,_that.from,_that.to,_that.collectionIds,_that.createdBy,_that.updatedBy,_that.createdAt,_that.updatedAt);case _:
@@ -1944,7 +1944,7 @@ return $default(_that.id,_that.sellerId,_that.farmerId,_that.total,_that.from,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String farmerId,  double total,  DateTime from,  DateTime to,  List<String> collectionIds,  String createdBy,  String? updatedBy,  DateTime createdAt,  DateTime? updatedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String farmerId,  double total, @DateTimeConverter()  DateTime from, @DateTimeConverter()  DateTime to,  List<String> collectionIds,  String createdBy,  String? updatedBy, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)  $default,) {final _that = this;
 switch (_that) {
 case _FarmerPayment():
 return $default(_that.id,_that.sellerId,_that.farmerId,_that.total,_that.from,_that.to,_that.collectionIds,_that.createdBy,_that.updatedBy,_that.createdAt,_that.updatedAt);case _:
@@ -1964,7 +1964,7 @@ return $default(_that.id,_that.sellerId,_that.farmerId,_that.total,_that.from,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String farmerId,  double total,  DateTime from,  DateTime to,  List<String> collectionIds,  String createdBy,  String? updatedBy,  DateTime createdAt,  DateTime? updatedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String farmerId,  double total, @DateTimeConverter()  DateTime from, @DateTimeConverter()  DateTime to,  List<String> collectionIds,  String createdBy,  String? updatedBy, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)?  $default,) {final _that = this;
 switch (_that) {
 case _FarmerPayment() when $default != null:
 return $default(_that.id,_that.sellerId,_that.farmerId,_that.total,_that.from,_that.to,_that.collectionIds,_that.createdBy,_that.updatedBy,_that.createdAt,_that.updatedAt);case _:
@@ -1979,15 +1979,15 @@ return $default(_that.id,_that.sellerId,_that.farmerId,_that.total,_that.from,_t
 @JsonSerializable()
 
 class _FarmerPayment implements FarmerPayment {
-  const _FarmerPayment({@JsonKey(name: '_id', includeIfNull: false) this.id, required this.sellerId, required this.farmerId, required this.total, required this.from, required this.to, required final  List<String> collectionIds, required this.createdBy, this.updatedBy, required this.createdAt, this.updatedAt}): _collectionIds = collectionIds;
+  const _FarmerPayment({@JsonKey(name: '_id', includeIfNull: false) this.id, required this.sellerId, required this.farmerId, required this.total, @DateTimeConverter() required this.from, @DateTimeConverter() required this.to, required final  List<String> collectionIds, required this.createdBy, this.updatedBy, @DateTimeConverter() required this.createdAt, @DateTimeConverter() this.updatedAt}): _collectionIds = collectionIds;
   factory _FarmerPayment.fromJson(Map<String, dynamic> json) => _$FarmerPaymentFromJson(json);
 
 @override@JsonKey(name: '_id', includeIfNull: false) final  String? id;
 @override final  String sellerId;
 @override final  String farmerId;
 @override final  double total;
-@override final  DateTime from;
-@override final  DateTime to;
+@override@DateTimeConverter() final  DateTime from;
+@override@DateTimeConverter() final  DateTime to;
  final  List<String> _collectionIds;
 @override List<String> get collectionIds {
   if (_collectionIds is EqualUnmodifiableListView) return _collectionIds;
@@ -1998,8 +1998,8 @@ class _FarmerPayment implements FarmerPayment {
 // List<String> is List<String>
 @override final  String createdBy;
 @override final  String? updatedBy;
-@override final  DateTime createdAt;
-@override final  DateTime? updatedAt;
+@override@DateTimeConverter() final  DateTime createdAt;
+@override@DateTimeConverter() final  DateTime? updatedAt;
 
 /// Create a copy of FarmerPayment
 /// with the given fields replaced by the non-null parameter values.
@@ -2034,7 +2034,7 @@ abstract mixin class _$FarmerPaymentCopyWith<$Res> implements $FarmerPaymentCopy
   factory _$FarmerPaymentCopyWith(_FarmerPayment value, $Res Function(_FarmerPayment) _then) = __$FarmerPaymentCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, String farmerId, double total, DateTime from, DateTime to, List<String> collectionIds, String createdBy, String? updatedBy, DateTime createdAt, DateTime? updatedAt
+@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, String farmerId, double total,@DateTimeConverter() DateTime from,@DateTimeConverter() DateTime to, List<String> collectionIds, String createdBy, String? updatedBy,@DateTimeConverter() DateTime createdAt,@DateTimeConverter() DateTime? updatedAt
 });
 
 
@@ -2343,8 +2343,8 @@ as int,
 /// @nodoc
 mixin _$Invoice {
 
-@JsonKey(name: '_id', includeIfNull: false) String? get id; String get sellerId; String get customerId; String? get supplierId; double get total; DateTime get from; DateTime get to; double get paid; double get pending; InvoiceStatus get status; List<String> get deliveryIds;// List<String> is List<String>
- String get createdBy; String? get updatedBy; DateTime get createdAt; DateTime? get updatedAt;
+@JsonKey(name: '_id', includeIfNull: false) String? get id; String get sellerId; String get customerId; String? get supplierId; double get total;@DateTimeConverter() DateTime get from;@DateTimeConverter() DateTime get to; double get paid; double get pending; InvoiceStatus get status; List<String> get deliveryIds;// List<String> is List<String>
+ String get createdBy; String? get updatedBy;@DateTimeConverter() DateTime get createdAt;@DateTimeConverter() DateTime? get updatedAt;
 /// Create a copy of Invoice
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -2377,7 +2377,7 @@ abstract mixin class $InvoiceCopyWith<$Res>  {
   factory $InvoiceCopyWith(Invoice value, $Res Function(Invoice) _then) = _$InvoiceCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, String customerId, String? supplierId, double total, DateTime from, DateTime to, double paid, double pending, InvoiceStatus status, List<String> deliveryIds, String createdBy, String? updatedBy, DateTime createdAt, DateTime? updatedAt
+@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, String customerId, String? supplierId, double total,@DateTimeConverter() DateTime from,@DateTimeConverter() DateTime to, double paid, double pending, InvoiceStatus status, List<String> deliveryIds, String createdBy, String? updatedBy,@DateTimeConverter() DateTime createdAt,@DateTimeConverter() DateTime? updatedAt
 });
 
 
@@ -2496,7 +2496,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String customerId,  String? supplierId,  double total,  DateTime from,  DateTime to,  double paid,  double pending,  InvoiceStatus status,  List<String> deliveryIds,  String createdBy,  String? updatedBy,  DateTime createdAt,  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String customerId,  String? supplierId,  double total, @DateTimeConverter()  DateTime from, @DateTimeConverter()  DateTime to,  double paid,  double pending,  InvoiceStatus status,  List<String> deliveryIds,  String createdBy,  String? updatedBy, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Invoice() when $default != null:
 return $default(_that.id,_that.sellerId,_that.customerId,_that.supplierId,_that.total,_that.from,_that.to,_that.paid,_that.pending,_that.status,_that.deliveryIds,_that.createdBy,_that.updatedBy,_that.createdAt,_that.updatedAt);case _:
@@ -2517,7 +2517,7 @@ return $default(_that.id,_that.sellerId,_that.customerId,_that.supplierId,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String customerId,  String? supplierId,  double total,  DateTime from,  DateTime to,  double paid,  double pending,  InvoiceStatus status,  List<String> deliveryIds,  String createdBy,  String? updatedBy,  DateTime createdAt,  DateTime? updatedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String customerId,  String? supplierId,  double total, @DateTimeConverter()  DateTime from, @DateTimeConverter()  DateTime to,  double paid,  double pending,  InvoiceStatus status,  List<String> deliveryIds,  String createdBy,  String? updatedBy, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)  $default,) {final _that = this;
 switch (_that) {
 case _Invoice():
 return $default(_that.id,_that.sellerId,_that.customerId,_that.supplierId,_that.total,_that.from,_that.to,_that.paid,_that.pending,_that.status,_that.deliveryIds,_that.createdBy,_that.updatedBy,_that.createdAt,_that.updatedAt);case _:
@@ -2537,7 +2537,7 @@ return $default(_that.id,_that.sellerId,_that.customerId,_that.supplierId,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String customerId,  String? supplierId,  double total,  DateTime from,  DateTime to,  double paid,  double pending,  InvoiceStatus status,  List<String> deliveryIds,  String createdBy,  String? updatedBy,  DateTime createdAt,  DateTime? updatedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String customerId,  String? supplierId,  double total, @DateTimeConverter()  DateTime from, @DateTimeConverter()  DateTime to,  double paid,  double pending,  InvoiceStatus status,  List<String> deliveryIds,  String createdBy,  String? updatedBy, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)?  $default,) {final _that = this;
 switch (_that) {
 case _Invoice() when $default != null:
 return $default(_that.id,_that.sellerId,_that.customerId,_that.supplierId,_that.total,_that.from,_that.to,_that.paid,_that.pending,_that.status,_that.deliveryIds,_that.createdBy,_that.updatedBy,_that.createdAt,_that.updatedAt);case _:
@@ -2552,7 +2552,7 @@ return $default(_that.id,_that.sellerId,_that.customerId,_that.supplierId,_that.
 @JsonSerializable()
 
 class _Invoice implements Invoice {
-  const _Invoice({@JsonKey(name: '_id', includeIfNull: false) this.id, required this.sellerId, required this.customerId, this.supplierId, required this.total, required this.from, required this.to, this.paid = 0, this.pending = 0, this.status = InvoiceStatus.pending, required final  List<String> deliveryIds, required this.createdBy, this.updatedBy, required this.createdAt, this.updatedAt}): _deliveryIds = deliveryIds;
+  const _Invoice({@JsonKey(name: '_id', includeIfNull: false) this.id, required this.sellerId, required this.customerId, this.supplierId, required this.total, @DateTimeConverter() required this.from, @DateTimeConverter() required this.to, this.paid = 0, this.pending = 0, this.status = InvoiceStatus.pending, required final  List<String> deliveryIds, required this.createdBy, this.updatedBy, @DateTimeConverter() required this.createdAt, @DateTimeConverter() this.updatedAt}): _deliveryIds = deliveryIds;
   factory _Invoice.fromJson(Map<String, dynamic> json) => _$InvoiceFromJson(json);
 
 @override@JsonKey(name: '_id', includeIfNull: false) final  String? id;
@@ -2560,8 +2560,8 @@ class _Invoice implements Invoice {
 @override final  String customerId;
 @override final  String? supplierId;
 @override final  double total;
-@override final  DateTime from;
-@override final  DateTime to;
+@override@DateTimeConverter() final  DateTime from;
+@override@DateTimeConverter() final  DateTime to;
 @override@JsonKey() final  double paid;
 @override@JsonKey() final  double pending;
 @override@JsonKey() final  InvoiceStatus status;
@@ -2575,8 +2575,8 @@ class _Invoice implements Invoice {
 // List<String> is List<String>
 @override final  String createdBy;
 @override final  String? updatedBy;
-@override final  DateTime createdAt;
-@override final  DateTime? updatedAt;
+@override@DateTimeConverter() final  DateTime createdAt;
+@override@DateTimeConverter() final  DateTime? updatedAt;
 
 /// Create a copy of Invoice
 /// with the given fields replaced by the non-null parameter values.
@@ -2611,7 +2611,7 @@ abstract mixin class _$InvoiceCopyWith<$Res> implements $InvoiceCopyWith<$Res> {
   factory _$InvoiceCopyWith(_Invoice value, $Res Function(_Invoice) _then) = __$InvoiceCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, String customerId, String? supplierId, double total, DateTime from, DateTime to, double paid, double pending, InvoiceStatus status, List<String> deliveryIds, String createdBy, String? updatedBy, DateTime createdAt, DateTime? updatedAt
+@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, String customerId, String? supplierId, double total,@DateTimeConverter() DateTime from,@DateTimeConverter() DateTime to, double paid, double pending, InvoiceStatus status, List<String> deliveryIds, String createdBy, String? updatedBy,@DateTimeConverter() DateTime createdAt,@DateTimeConverter() DateTime? updatedAt
 });
 
 
@@ -2656,7 +2656,7 @@ as DateTime?,
 /// @nodoc
 mixin _$Pricing {
 
-@JsonKey(name: '_id', includeIfNull: false) String? get id; String get sellerId; Item get item; double get price; DateTime get createdAt; DateTime? get updatedAt;
+@JsonKey(name: '_id', includeIfNull: false) String? get id; String get sellerId; Item get item; double get price;@DateTimeConverter() DateTime get createdAt;@DateTimeConverter() DateTime? get updatedAt;
 /// Create a copy of Pricing
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -2689,7 +2689,7 @@ abstract mixin class $PricingCopyWith<$Res>  {
   factory $PricingCopyWith(Pricing value, $Res Function(Pricing) _then) = _$PricingCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, Item item, double price, DateTime createdAt, DateTime? updatedAt
+@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, Item item, double price,@DateTimeConverter() DateTime createdAt,@DateTimeConverter() DateTime? updatedAt
 });
 
 
@@ -2799,7 +2799,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  Item item,  double price,  DateTime createdAt,  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  Item item,  double price, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Pricing() when $default != null:
 return $default(_that.id,_that.sellerId,_that.item,_that.price,_that.createdAt,_that.updatedAt);case _:
@@ -2820,7 +2820,7 @@ return $default(_that.id,_that.sellerId,_that.item,_that.price,_that.createdAt,_
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  Item item,  double price,  DateTime createdAt,  DateTime? updatedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  Item item,  double price, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)  $default,) {final _that = this;
 switch (_that) {
 case _Pricing():
 return $default(_that.id,_that.sellerId,_that.item,_that.price,_that.createdAt,_that.updatedAt);case _:
@@ -2840,7 +2840,7 @@ return $default(_that.id,_that.sellerId,_that.item,_that.price,_that.createdAt,_
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  Item item,  double price,  DateTime createdAt,  DateTime? updatedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  Item item,  double price, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)?  $default,) {final _that = this;
 switch (_that) {
 case _Pricing() when $default != null:
 return $default(_that.id,_that.sellerId,_that.item,_that.price,_that.createdAt,_that.updatedAt);case _:
@@ -2855,15 +2855,15 @@ return $default(_that.id,_that.sellerId,_that.item,_that.price,_that.createdAt,_
 @JsonSerializable()
 
 class _Pricing implements Pricing {
-  const _Pricing({@JsonKey(name: '_id', includeIfNull: false) this.id, required this.sellerId, required this.item, required this.price, required this.createdAt, this.updatedAt});
+  const _Pricing({@JsonKey(name: '_id', includeIfNull: false) this.id, required this.sellerId, required this.item, required this.price, @DateTimeConverter() required this.createdAt, @DateTimeConverter() this.updatedAt});
   factory _Pricing.fromJson(Map<String, dynamic> json) => _$PricingFromJson(json);
 
 @override@JsonKey(name: '_id', includeIfNull: false) final  String? id;
 @override final  String sellerId;
 @override final  Item item;
 @override final  double price;
-@override final  DateTime createdAt;
-@override final  DateTime? updatedAt;
+@override@DateTimeConverter() final  DateTime createdAt;
+@override@DateTimeConverter() final  DateTime? updatedAt;
 
 /// Create a copy of Pricing
 /// with the given fields replaced by the non-null parameter values.
@@ -2898,7 +2898,7 @@ abstract mixin class _$PricingCopyWith<$Res> implements $PricingCopyWith<$Res> {
   factory _$PricingCopyWith(_Pricing value, $Res Function(_Pricing) _then) = __$PricingCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, Item item, double price, DateTime createdAt, DateTime? updatedAt
+@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, Item item, double price,@DateTimeConverter() DateTime createdAt,@DateTimeConverter() DateTime? updatedAt
 });
 
 
@@ -3201,7 +3201,7 @@ as double,
 mixin _$RateChart {
 
 @JsonKey(name: '_id', includeIfNull: false) String? get id; String get sellerId; Item get item; double get base; List<RateChartStep>? get fatSteps; List<RateChartStep>? get snfSteps; Map<String, Map<String, double>> get data;// Map<String,Map<String,double>>
- DateTime get createdAt; DateTime? get updatedAt;
+@DateTimeConverter() DateTime get createdAt;@DateTimeConverter() DateTime? get updatedAt;
 /// Create a copy of RateChart
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -3234,7 +3234,7 @@ abstract mixin class $RateChartCopyWith<$Res>  {
   factory $RateChartCopyWith(RateChart value, $Res Function(RateChart) _then) = _$RateChartCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, Item item, double base, List<RateChartStep>? fatSteps, List<RateChartStep>? snfSteps, Map<String, Map<String, double>> data, DateTime createdAt, DateTime? updatedAt
+@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, Item item, double base, List<RateChartStep>? fatSteps, List<RateChartStep>? snfSteps, Map<String, Map<String, double>> data,@DateTimeConverter() DateTime createdAt,@DateTimeConverter() DateTime? updatedAt
 });
 
 
@@ -3347,7 +3347,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  Item item,  double base,  List<RateChartStep>? fatSteps,  List<RateChartStep>? snfSteps,  Map<String, Map<String, double>> data,  DateTime createdAt,  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  Item item,  double base,  List<RateChartStep>? fatSteps,  List<RateChartStep>? snfSteps,  Map<String, Map<String, double>> data, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _RateChart() when $default != null:
 return $default(_that.id,_that.sellerId,_that.item,_that.base,_that.fatSteps,_that.snfSteps,_that.data,_that.createdAt,_that.updatedAt);case _:
@@ -3368,7 +3368,7 @@ return $default(_that.id,_that.sellerId,_that.item,_that.base,_that.fatSteps,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  Item item,  double base,  List<RateChartStep>? fatSteps,  List<RateChartStep>? snfSteps,  Map<String, Map<String, double>> data,  DateTime createdAt,  DateTime? updatedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  Item item,  double base,  List<RateChartStep>? fatSteps,  List<RateChartStep>? snfSteps,  Map<String, Map<String, double>> data, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)  $default,) {final _that = this;
 switch (_that) {
 case _RateChart():
 return $default(_that.id,_that.sellerId,_that.item,_that.base,_that.fatSteps,_that.snfSteps,_that.data,_that.createdAt,_that.updatedAt);case _:
@@ -3388,7 +3388,7 @@ return $default(_that.id,_that.sellerId,_that.item,_that.base,_that.fatSteps,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  Item item,  double base,  List<RateChartStep>? fatSteps,  List<RateChartStep>? snfSteps,  Map<String, Map<String, double>> data,  DateTime createdAt,  DateTime? updatedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  Item item,  double base,  List<RateChartStep>? fatSteps,  List<RateChartStep>? snfSteps,  Map<String, Map<String, double>> data, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)?  $default,) {final _that = this;
 switch (_that) {
 case _RateChart() when $default != null:
 return $default(_that.id,_that.sellerId,_that.item,_that.base,_that.fatSteps,_that.snfSteps,_that.data,_that.createdAt,_that.updatedAt);case _:
@@ -3403,7 +3403,7 @@ return $default(_that.id,_that.sellerId,_that.item,_that.base,_that.fatSteps,_th
 @JsonSerializable()
 
 class _RateChart implements RateChart {
-  const _RateChart({@JsonKey(name: '_id', includeIfNull: false) this.id, required this.sellerId, required this.item, required this.base, final  List<RateChartStep>? fatSteps, final  List<RateChartStep>? snfSteps, required final  Map<String, Map<String, double>> data, required this.createdAt, this.updatedAt}): _fatSteps = fatSteps,_snfSteps = snfSteps,_data = data;
+  const _RateChart({@JsonKey(name: '_id', includeIfNull: false) this.id, required this.sellerId, required this.item, required this.base, final  List<RateChartStep>? fatSteps, final  List<RateChartStep>? snfSteps, required final  Map<String, Map<String, double>> data, @DateTimeConverter() required this.createdAt, @DateTimeConverter() this.updatedAt}): _fatSteps = fatSteps,_snfSteps = snfSteps,_data = data;
   factory _RateChart.fromJson(Map<String, dynamic> json) => _$RateChartFromJson(json);
 
 @override@JsonKey(name: '_id', includeIfNull: false) final  String? id;
@@ -3436,8 +3436,8 @@ class _RateChart implements RateChart {
 }
 
 // Map<String,Map<String,double>>
-@override final  DateTime createdAt;
-@override final  DateTime? updatedAt;
+@override@DateTimeConverter() final  DateTime createdAt;
+@override@DateTimeConverter() final  DateTime? updatedAt;
 
 /// Create a copy of RateChart
 /// with the given fields replaced by the non-null parameter values.
@@ -3472,7 +3472,7 @@ abstract mixin class _$RateChartCopyWith<$Res> implements $RateChartCopyWith<$Re
   factory _$RateChartCopyWith(_RateChart value, $Res Function(_RateChart) _then) = __$RateChartCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, Item item, double base, List<RateChartStep>? fatSteps, List<RateChartStep>? snfSteps, Map<String, Map<String, double>> data, DateTime createdAt, DateTime? updatedAt
+@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, Item item, double base, List<RateChartStep>? fatSteps, List<RateChartStep>? snfSteps, Map<String, Map<String, double>> data,@DateTimeConverter() DateTime createdAt,@DateTimeConverter() DateTime? updatedAt
 });
 
 
@@ -3511,7 +3511,7 @@ as DateTime?,
 /// @nodoc
 mixin _$Sale {
 
-@JsonKey(name: '_id', includeIfNull: false) String? get id; String get sellerId; String? get supplierId; Item get item; double get price; double get quantity; double get total; DateTime get soldAt; DateTime get createdAt; DateTime? get updatedAt;
+@JsonKey(name: '_id', includeIfNull: false) String? get id; String get sellerId; String? get supplierId; Item get item; double get price; double get quantity; double get total;@DateTimeConverter() DateTime get soldAt;@DateTimeConverter() DateTime get createdAt; DateTime? get updatedAt;
 /// Create a copy of Sale
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -3544,7 +3544,7 @@ abstract mixin class $SaleCopyWith<$Res>  {
   factory $SaleCopyWith(Sale value, $Res Function(Sale) _then) = _$SaleCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, String? supplierId, Item item, double price, double quantity, double total, DateTime soldAt, DateTime createdAt, DateTime? updatedAt
+@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, String? supplierId, Item item, double price, double quantity, double total,@DateTimeConverter() DateTime soldAt,@DateTimeConverter() DateTime createdAt, DateTime? updatedAt
 });
 
 
@@ -3658,7 +3658,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String? supplierId,  Item item,  double price,  double quantity,  double total,  DateTime soldAt,  DateTime createdAt,  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String? supplierId,  Item item,  double price,  double quantity,  double total, @DateTimeConverter()  DateTime soldAt, @DateTimeConverter()  DateTime createdAt,  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Sale() when $default != null:
 return $default(_that.id,_that.sellerId,_that.supplierId,_that.item,_that.price,_that.quantity,_that.total,_that.soldAt,_that.createdAt,_that.updatedAt);case _:
@@ -3679,7 +3679,7 @@ return $default(_that.id,_that.sellerId,_that.supplierId,_that.item,_that.price,
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String? supplierId,  Item item,  double price,  double quantity,  double total,  DateTime soldAt,  DateTime createdAt,  DateTime? updatedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String? supplierId,  Item item,  double price,  double quantity,  double total, @DateTimeConverter()  DateTime soldAt, @DateTimeConverter()  DateTime createdAt,  DateTime? updatedAt)  $default,) {final _that = this;
 switch (_that) {
 case _Sale():
 return $default(_that.id,_that.sellerId,_that.supplierId,_that.item,_that.price,_that.quantity,_that.total,_that.soldAt,_that.createdAt,_that.updatedAt);case _:
@@ -3699,7 +3699,7 @@ return $default(_that.id,_that.sellerId,_that.supplierId,_that.item,_that.price,
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String? supplierId,  Item item,  double price,  double quantity,  double total,  DateTime soldAt,  DateTime createdAt,  DateTime? updatedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String? supplierId,  Item item,  double price,  double quantity,  double total, @DateTimeConverter()  DateTime soldAt, @DateTimeConverter()  DateTime createdAt,  DateTime? updatedAt)?  $default,) {final _that = this;
 switch (_that) {
 case _Sale() when $default != null:
 return $default(_that.id,_that.sellerId,_that.supplierId,_that.item,_that.price,_that.quantity,_that.total,_that.soldAt,_that.createdAt,_that.updatedAt);case _:
@@ -3714,7 +3714,7 @@ return $default(_that.id,_that.sellerId,_that.supplierId,_that.item,_that.price,
 @JsonSerializable()
 
 class _Sale implements Sale {
-  const _Sale({@JsonKey(name: '_id', includeIfNull: false) this.id, required this.sellerId, this.supplierId, required this.item, required this.price, required this.quantity, required this.total, required this.soldAt, required this.createdAt, this.updatedAt});
+  const _Sale({@JsonKey(name: '_id', includeIfNull: false) this.id, required this.sellerId, this.supplierId, required this.item, required this.price, required this.quantity, required this.total, @DateTimeConverter() required this.soldAt, @DateTimeConverter() required this.createdAt, this.updatedAt});
   factory _Sale.fromJson(Map<String, dynamic> json) => _$SaleFromJson(json);
 
 @override@JsonKey(name: '_id', includeIfNull: false) final  String? id;
@@ -3724,8 +3724,8 @@ class _Sale implements Sale {
 @override final  double price;
 @override final  double quantity;
 @override final  double total;
-@override final  DateTime soldAt;
-@override final  DateTime createdAt;
+@override@DateTimeConverter() final  DateTime soldAt;
+@override@DateTimeConverter() final  DateTime createdAt;
 @override final  DateTime? updatedAt;
 
 /// Create a copy of Sale
@@ -3761,7 +3761,7 @@ abstract mixin class _$SaleCopyWith<$Res> implements $SaleCopyWith<$Res> {
   factory _$SaleCopyWith(_Sale value, $Res Function(_Sale) _then) = __$SaleCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, String? supplierId, Item item, double price, double quantity, double total, DateTime soldAt, DateTime createdAt, DateTime? updatedAt
+@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, String? supplierId, Item item, double price, double quantity, double total,@DateTimeConverter() DateTime soldAt,@DateTimeConverter() DateTime createdAt, DateTime? updatedAt
 });
 
 
@@ -4068,7 +4068,7 @@ as bool,
 mixin _$SuReturn {
 
 @JsonKey(name: '_id', includeIfNull: false) String? get id; String get sellerId; String get supplierId;@ItemMapConverter() Map<Item, double> get items;// Use converter for Item keys
- DateTime get returnedAt; DateTime get createdAt; DateTime? get updatedAt;
+@DateTimeConverter() DateTime get returnedAt;@DateTimeConverter() DateTime get createdAt;@DateTimeConverter() DateTime? get updatedAt;
 /// Create a copy of SuReturn
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -4101,7 +4101,7 @@ abstract mixin class $SuReturnCopyWith<$Res>  {
   factory $SuReturnCopyWith(SuReturn value, $Res Function(SuReturn) _then) = _$SuReturnCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, String supplierId,@ItemMapConverter() Map<Item, double> items, DateTime returnedAt, DateTime createdAt, DateTime? updatedAt
+@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, String supplierId,@ItemMapConverter() Map<Item, double> items,@DateTimeConverter() DateTime returnedAt,@DateTimeConverter() DateTime createdAt,@DateTimeConverter() DateTime? updatedAt
 });
 
 
@@ -4212,7 +4212,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String supplierId, @ItemMapConverter()  Map<Item, double> items,  DateTime returnedAt,  DateTime createdAt,  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String supplierId, @ItemMapConverter()  Map<Item, double> items, @DateTimeConverter()  DateTime returnedAt, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SuReturn() when $default != null:
 return $default(_that.id,_that.sellerId,_that.supplierId,_that.items,_that.returnedAt,_that.createdAt,_that.updatedAt);case _:
@@ -4233,7 +4233,7 @@ return $default(_that.id,_that.sellerId,_that.supplierId,_that.items,_that.retur
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String supplierId, @ItemMapConverter()  Map<Item, double> items,  DateTime returnedAt,  DateTime createdAt,  DateTime? updatedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String supplierId, @ItemMapConverter()  Map<Item, double> items, @DateTimeConverter()  DateTime returnedAt, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)  $default,) {final _that = this;
 switch (_that) {
 case _SuReturn():
 return $default(_that.id,_that.sellerId,_that.supplierId,_that.items,_that.returnedAt,_that.createdAt,_that.updatedAt);case _:
@@ -4253,7 +4253,7 @@ return $default(_that.id,_that.sellerId,_that.supplierId,_that.items,_that.retur
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String supplierId, @ItemMapConverter()  Map<Item, double> items,  DateTime returnedAt,  DateTime createdAt,  DateTime? updatedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String supplierId, @ItemMapConverter()  Map<Item, double> items, @DateTimeConverter()  DateTime returnedAt, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)?  $default,) {final _that = this;
 switch (_that) {
 case _SuReturn() when $default != null:
 return $default(_that.id,_that.sellerId,_that.supplierId,_that.items,_that.returnedAt,_that.createdAt,_that.updatedAt);case _:
@@ -4268,7 +4268,7 @@ return $default(_that.id,_that.sellerId,_that.supplierId,_that.items,_that.retur
 @JsonSerializable()
 
 class _SuReturn implements SuReturn {
-  const _SuReturn({@JsonKey(name: '_id', includeIfNull: false) this.id, required this.sellerId, required this.supplierId, @ItemMapConverter() required final  Map<Item, double> items, required this.returnedAt, required this.createdAt, this.updatedAt}): _items = items;
+  const _SuReturn({@JsonKey(name: '_id', includeIfNull: false) this.id, required this.sellerId, required this.supplierId, @ItemMapConverter() required final  Map<Item, double> items, @DateTimeConverter() required this.returnedAt, @DateTimeConverter() required this.createdAt, @DateTimeConverter() this.updatedAt}): _items = items;
   factory _SuReturn.fromJson(Map<String, dynamic> json) => _$SuReturnFromJson(json);
 
 @override@JsonKey(name: '_id', includeIfNull: false) final  String? id;
@@ -4282,9 +4282,9 @@ class _SuReturn implements SuReturn {
 }
 
 // Use converter for Item keys
-@override final  DateTime returnedAt;
-@override final  DateTime createdAt;
-@override final  DateTime? updatedAt;
+@override@DateTimeConverter() final  DateTime returnedAt;
+@override@DateTimeConverter() final  DateTime createdAt;
+@override@DateTimeConverter() final  DateTime? updatedAt;
 
 /// Create a copy of SuReturn
 /// with the given fields replaced by the non-null parameter values.
@@ -4319,7 +4319,7 @@ abstract mixin class _$SuReturnCopyWith<$Res> implements $SuReturnCopyWith<$Res>
   factory _$SuReturnCopyWith(_SuReturn value, $Res Function(_SuReturn) _then) = __$SuReturnCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, String supplierId,@ItemMapConverter() Map<Item, double> items, DateTime returnedAt, DateTime createdAt, DateTime? updatedAt
+@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, String supplierId,@ItemMapConverter() Map<Item, double> items,@DateTimeConverter() DateTime returnedAt,@DateTimeConverter() DateTime createdAt,@DateTimeConverter() DateTime? updatedAt
 });
 
 
@@ -4357,7 +4357,7 @@ as DateTime?,
 mixin _$Subscription {
 
  Item get item; double get quantity; Unit get unit; String get pricingId;// String is String
- bool get active; DateTime get createdAt; DateTime? get updatedAt;
+ bool get active;@DateTimeConverter() DateTime get createdAt;@DateTimeConverter() DateTime? get updatedAt;
 /// Create a copy of Subscription
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -4390,7 +4390,7 @@ abstract mixin class $SubscriptionCopyWith<$Res>  {
   factory $SubscriptionCopyWith(Subscription value, $Res Function(Subscription) _then) = _$SubscriptionCopyWithImpl;
 @useResult
 $Res call({
- Item item, double quantity, Unit unit, String pricingId, bool active, DateTime createdAt, DateTime? updatedAt
+ Item item, double quantity, Unit unit, String pricingId, bool active,@DateTimeConverter() DateTime createdAt,@DateTimeConverter() DateTime? updatedAt
 });
 
 
@@ -4501,7 +4501,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Item item,  double quantity,  Unit unit,  String pricingId,  bool active,  DateTime createdAt,  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Item item,  double quantity,  Unit unit,  String pricingId,  bool active, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Subscription() when $default != null:
 return $default(_that.item,_that.quantity,_that.unit,_that.pricingId,_that.active,_that.createdAt,_that.updatedAt);case _:
@@ -4522,7 +4522,7 @@ return $default(_that.item,_that.quantity,_that.unit,_that.pricingId,_that.activ
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Item item,  double quantity,  Unit unit,  String pricingId,  bool active,  DateTime createdAt,  DateTime? updatedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Item item,  double quantity,  Unit unit,  String pricingId,  bool active, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)  $default,) {final _that = this;
 switch (_that) {
 case _Subscription():
 return $default(_that.item,_that.quantity,_that.unit,_that.pricingId,_that.active,_that.createdAt,_that.updatedAt);case _:
@@ -4542,7 +4542,7 @@ return $default(_that.item,_that.quantity,_that.unit,_that.pricingId,_that.activ
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Item item,  double quantity,  Unit unit,  String pricingId,  bool active,  DateTime createdAt,  DateTime? updatedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Item item,  double quantity,  Unit unit,  String pricingId,  bool active, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)?  $default,) {final _that = this;
 switch (_that) {
 case _Subscription() when $default != null:
 return $default(_that.item,_that.quantity,_that.unit,_that.pricingId,_that.active,_that.createdAt,_that.updatedAt);case _:
@@ -4557,7 +4557,7 @@ return $default(_that.item,_that.quantity,_that.unit,_that.pricingId,_that.activ
 @JsonSerializable()
 
 class _Subscription implements Subscription {
-  const _Subscription({required this.item, required this.quantity, required this.unit, required this.pricingId, required this.active, required this.createdAt, this.updatedAt});
+  const _Subscription({required this.item, required this.quantity, required this.unit, required this.pricingId, required this.active, @DateTimeConverter() required this.createdAt, @DateTimeConverter() this.updatedAt});
   factory _Subscription.fromJson(Map<String, dynamic> json) => _$SubscriptionFromJson(json);
 
 @override final  Item item;
@@ -4566,8 +4566,8 @@ class _Subscription implements Subscription {
 @override final  String pricingId;
 // String is String
 @override final  bool active;
-@override final  DateTime createdAt;
-@override final  DateTime? updatedAt;
+@override@DateTimeConverter() final  DateTime createdAt;
+@override@DateTimeConverter() final  DateTime? updatedAt;
 
 /// Create a copy of Subscription
 /// with the given fields replaced by the non-null parameter values.
@@ -4602,7 +4602,7 @@ abstract mixin class _$SubscriptionCopyWith<$Res> implements $SubscriptionCopyWi
   factory _$SubscriptionCopyWith(_Subscription value, $Res Function(_Subscription) _then) = __$SubscriptionCopyWithImpl;
 @override @useResult
 $Res call({
- Item item, double quantity, Unit unit, String pricingId, bool active, DateTime createdAt, DateTime? updatedAt
+ Item item, double quantity, Unit unit, String pricingId, bool active,@DateTimeConverter() DateTime createdAt,@DateTimeConverter() DateTime? updatedAt
 });
 
 
@@ -4639,7 +4639,7 @@ as DateTime?,
 /// @nodoc
 mixin _$SupplierDay {
 
-@JsonKey(name: '_id', includeIfNull: false) String? get id; String get sellerId; String get supplierId; bool get freez; DateTime? get startedAt; DateTime get createdAt; DateTime? get updatedAt;
+@JsonKey(name: '_id', includeIfNull: false) String? get id; String get sellerId; String get supplierId; bool get freez; DateTime? get startedAt;@DateTimeConverter() DateTime get createdAt;@DateTimeConverter() DateTime? get updatedAt;
 /// Create a copy of SupplierDay
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -4672,7 +4672,7 @@ abstract mixin class $SupplierDayCopyWith<$Res>  {
   factory $SupplierDayCopyWith(SupplierDay value, $Res Function(SupplierDay) _then) = _$SupplierDayCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, String supplierId, bool freez, DateTime? startedAt, DateTime createdAt, DateTime? updatedAt
+@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, String supplierId, bool freez, DateTime? startedAt,@DateTimeConverter() DateTime createdAt,@DateTimeConverter() DateTime? updatedAt
 });
 
 
@@ -4783,7 +4783,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String supplierId,  bool freez,  DateTime? startedAt,  DateTime createdAt,  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String supplierId,  bool freez,  DateTime? startedAt, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SupplierDay() when $default != null:
 return $default(_that.id,_that.sellerId,_that.supplierId,_that.freez,_that.startedAt,_that.createdAt,_that.updatedAt);case _:
@@ -4804,7 +4804,7 @@ return $default(_that.id,_that.sellerId,_that.supplierId,_that.freez,_that.start
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String supplierId,  bool freez,  DateTime? startedAt,  DateTime createdAt,  DateTime? updatedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String supplierId,  bool freez,  DateTime? startedAt, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)  $default,) {final _that = this;
 switch (_that) {
 case _SupplierDay():
 return $default(_that.id,_that.sellerId,_that.supplierId,_that.freez,_that.startedAt,_that.createdAt,_that.updatedAt);case _:
@@ -4824,7 +4824,7 @@ return $default(_that.id,_that.sellerId,_that.supplierId,_that.freez,_that.start
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String supplierId,  bool freez,  DateTime? startedAt,  DateTime createdAt,  DateTime? updatedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String supplierId,  bool freez,  DateTime? startedAt, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)?  $default,) {final _that = this;
 switch (_that) {
 case _SupplierDay() when $default != null:
 return $default(_that.id,_that.sellerId,_that.supplierId,_that.freez,_that.startedAt,_that.createdAt,_that.updatedAt);case _:
@@ -4839,7 +4839,7 @@ return $default(_that.id,_that.sellerId,_that.supplierId,_that.freez,_that.start
 @JsonSerializable()
 
 class _SupplierDay implements SupplierDay {
-  const _SupplierDay({@JsonKey(name: '_id', includeIfNull: false) this.id, required this.sellerId, required this.supplierId, required this.freez, this.startedAt, required this.createdAt, this.updatedAt});
+  const _SupplierDay({@JsonKey(name: '_id', includeIfNull: false) this.id, required this.sellerId, required this.supplierId, required this.freez, this.startedAt, @DateTimeConverter() required this.createdAt, @DateTimeConverter() this.updatedAt});
   factory _SupplierDay.fromJson(Map<String, dynamic> json) => _$SupplierDayFromJson(json);
 
 @override@JsonKey(name: '_id', includeIfNull: false) final  String? id;
@@ -4847,8 +4847,8 @@ class _SupplierDay implements SupplierDay {
 @override final  String supplierId;
 @override final  bool freez;
 @override final  DateTime? startedAt;
-@override final  DateTime createdAt;
-@override final  DateTime? updatedAt;
+@override@DateTimeConverter() final  DateTime createdAt;
+@override@DateTimeConverter() final  DateTime? updatedAt;
 
 /// Create a copy of SupplierDay
 /// with the given fields replaced by the non-null parameter values.
@@ -4883,7 +4883,7 @@ abstract mixin class _$SupplierDayCopyWith<$Res> implements $SupplierDayCopyWith
   factory _$SupplierDayCopyWith(_SupplierDay value, $Res Function(_SupplierDay) _then) = __$SupplierDayCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, String supplierId, bool freez, DateTime? startedAt, DateTime createdAt, DateTime? updatedAt
+@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, String supplierId, bool freez, DateTime? startedAt,@DateTimeConverter() DateTime createdAt,@DateTimeConverter() DateTime? updatedAt
 });
 
 
@@ -5551,7 +5551,7 @@ $SupplierSettingsCopyWith<$Res>? get suSettings {
 /// @nodoc
 mixin _$User {
 
-@JsonKey(name: '_id', includeIfNull: false) String? get id; Role get role; int get index; String? get sellerId; String? get supplierId; String? get fcmToken; String? get phone; String? get name; String? get dairy; String? get address; String? get state; String? get city; String? get image; List<Subscription>? get subscriptions; List<Collection>? get collections; DateTime? get expiryAt; SellerSettings? get seSettings; SupplierSettings? get suSettings; bool get active; DateTime get createdAt; DateTime? get updatedAt;
+@JsonKey(name: '_id', includeIfNull: false) String? get id; Role get role; int get index; String? get sellerId; String? get supplierId; String? get fcmToken; String? get phone; String? get name; String? get dairy; String? get address; String? get state; String? get city; String? get image; List<Subscription>? get subscriptions; List<Collection>? get collections; DateTime? get expiryAt; SellerSettings? get seSettings; SupplierSettings? get suSettings; bool get active;@DateTimeConverter() DateTime get createdAt; DateTime? get updatedAt;
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -5584,7 +5584,7 @@ abstract mixin class $UserCopyWith<$Res>  {
   factory $UserCopyWith(User value, $Res Function(User) _then) = _$UserCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: '_id', includeIfNull: false) String? id, Role role, int index, String? sellerId, String? supplierId, String? fcmToken, String? phone, String? name, String? dairy, String? address, String? state, String? city, String? image, List<Subscription>? subscriptions, List<Collection>? collections, DateTime? expiryAt, SellerSettings? seSettings, SupplierSettings? suSettings, bool active, DateTime createdAt, DateTime? updatedAt
+@JsonKey(name: '_id', includeIfNull: false) String? id, Role role, int index, String? sellerId, String? supplierId, String? fcmToken, String? phone, String? name, String? dairy, String? address, String? state, String? city, String? image, List<Subscription>? subscriptions, List<Collection>? collections, DateTime? expiryAt, SellerSettings? seSettings, SupplierSettings? suSettings, bool active,@DateTimeConverter() DateTime createdAt, DateTime? updatedAt
 });
 
 
@@ -5733,7 +5733,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  Role role,  int index,  String? sellerId,  String? supplierId,  String? fcmToken,  String? phone,  String? name,  String? dairy,  String? address,  String? state,  String? city,  String? image,  List<Subscription>? subscriptions,  List<Collection>? collections,  DateTime? expiryAt,  SellerSettings? seSettings,  SupplierSettings? suSettings,  bool active,  DateTime createdAt,  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  Role role,  int index,  String? sellerId,  String? supplierId,  String? fcmToken,  String? phone,  String? name,  String? dairy,  String? address,  String? state,  String? city,  String? image,  List<Subscription>? subscriptions,  List<Collection>? collections,  DateTime? expiryAt,  SellerSettings? seSettings,  SupplierSettings? suSettings,  bool active, @DateTimeConverter()  DateTime createdAt,  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _User() when $default != null:
 return $default(_that.id,_that.role,_that.index,_that.sellerId,_that.supplierId,_that.fcmToken,_that.phone,_that.name,_that.dairy,_that.address,_that.state,_that.city,_that.image,_that.subscriptions,_that.collections,_that.expiryAt,_that.seSettings,_that.suSettings,_that.active,_that.createdAt,_that.updatedAt);case _:
@@ -5754,7 +5754,7 @@ return $default(_that.id,_that.role,_that.index,_that.sellerId,_that.supplierId,
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  Role role,  int index,  String? sellerId,  String? supplierId,  String? fcmToken,  String? phone,  String? name,  String? dairy,  String? address,  String? state,  String? city,  String? image,  List<Subscription>? subscriptions,  List<Collection>? collections,  DateTime? expiryAt,  SellerSettings? seSettings,  SupplierSettings? suSettings,  bool active,  DateTime createdAt,  DateTime? updatedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  Role role,  int index,  String? sellerId,  String? supplierId,  String? fcmToken,  String? phone,  String? name,  String? dairy,  String? address,  String? state,  String? city,  String? image,  List<Subscription>? subscriptions,  List<Collection>? collections,  DateTime? expiryAt,  SellerSettings? seSettings,  SupplierSettings? suSettings,  bool active, @DateTimeConverter()  DateTime createdAt,  DateTime? updatedAt)  $default,) {final _that = this;
 switch (_that) {
 case _User():
 return $default(_that.id,_that.role,_that.index,_that.sellerId,_that.supplierId,_that.fcmToken,_that.phone,_that.name,_that.dairy,_that.address,_that.state,_that.city,_that.image,_that.subscriptions,_that.collections,_that.expiryAt,_that.seSettings,_that.suSettings,_that.active,_that.createdAt,_that.updatedAt);case _:
@@ -5774,7 +5774,7 @@ return $default(_that.id,_that.role,_that.index,_that.sellerId,_that.supplierId,
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  Role role,  int index,  String? sellerId,  String? supplierId,  String? fcmToken,  String? phone,  String? name,  String? dairy,  String? address,  String? state,  String? city,  String? image,  List<Subscription>? subscriptions,  List<Collection>? collections,  DateTime? expiryAt,  SellerSettings? seSettings,  SupplierSettings? suSettings,  bool active,  DateTime createdAt,  DateTime? updatedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  Role role,  int index,  String? sellerId,  String? supplierId,  String? fcmToken,  String? phone,  String? name,  String? dairy,  String? address,  String? state,  String? city,  String? image,  List<Subscription>? subscriptions,  List<Collection>? collections,  DateTime? expiryAt,  SellerSettings? seSettings,  SupplierSettings? suSettings,  bool active, @DateTimeConverter()  DateTime createdAt,  DateTime? updatedAt)?  $default,) {final _that = this;
 switch (_that) {
 case _User() when $default != null:
 return $default(_that.id,_that.role,_that.index,_that.sellerId,_that.supplierId,_that.fcmToken,_that.phone,_that.name,_that.dairy,_that.address,_that.state,_that.city,_that.image,_that.subscriptions,_that.collections,_that.expiryAt,_that.seSettings,_that.suSettings,_that.active,_that.createdAt,_that.updatedAt);case _:
@@ -5789,7 +5789,7 @@ return $default(_that.id,_that.role,_that.index,_that.sellerId,_that.supplierId,
 @JsonSerializable()
 
 class _User implements User {
-  const _User({@JsonKey(name: '_id', includeIfNull: false) this.id, required this.role, required this.index, this.sellerId, this.supplierId, this.fcmToken, this.phone, this.name, this.dairy, this.address, this.state, this.city, this.image, final  List<Subscription>? subscriptions, final  List<Collection>? collections, this.expiryAt, this.seSettings, this.suSettings, this.active = true, required this.createdAt, this.updatedAt}): _subscriptions = subscriptions,_collections = collections;
+  const _User({@JsonKey(name: '_id', includeIfNull: false) this.id, required this.role, required this.index, this.sellerId, this.supplierId, this.fcmToken, this.phone, this.name, this.dairy, this.address, this.state, this.city, this.image, final  List<Subscription>? subscriptions, final  List<Collection>? collections, this.expiryAt, this.seSettings, this.suSettings, this.active = true, @DateTimeConverter() required this.createdAt, this.updatedAt}): _subscriptions = subscriptions,_collections = collections;
   factory _User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
 @override@JsonKey(name: '_id', includeIfNull: false) final  String? id;
@@ -5827,7 +5827,7 @@ class _User implements User {
 @override final  SellerSettings? seSettings;
 @override final  SupplierSettings? suSettings;
 @override@JsonKey() final  bool active;
-@override final  DateTime createdAt;
+@override@DateTimeConverter() final  DateTime createdAt;
 @override final  DateTime? updatedAt;
 
 /// Create a copy of User
@@ -5863,7 +5863,7 @@ abstract mixin class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$UserCopyWith(_User value, $Res Function(_User) _then) = __$UserCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: '_id', includeIfNull: false) String? id, Role role, int index, String? sellerId, String? supplierId, String? fcmToken, String? phone, String? name, String? dairy, String? address, String? state, String? city, String? image, List<Subscription>? subscriptions, List<Collection>? collections, DateTime? expiryAt, SellerSettings? seSettings, SupplierSettings? suSettings, bool active, DateTime createdAt, DateTime? updatedAt
+@JsonKey(name: '_id', includeIfNull: false) String? id, Role role, int index, String? sellerId, String? supplierId, String? fcmToken, String? phone, String? name, String? dairy, String? address, String? state, String? city, String? image, List<Subscription>? subscriptions, List<Collection>? collections, DateTime? expiryAt, SellerSettings? seSettings, SupplierSettings? suSettings, bool active,@DateTimeConverter() DateTime createdAt, DateTime? updatedAt
 });
 
 
@@ -5938,7 +5938,7 @@ $SupplierSettingsCopyWith<$Res>? get suSettings {
 /// @nodoc
 mixin _$WalletTransaction {
 
-@JsonKey(name: '_id', includeIfNull: false) String? get id; String get sellerId; String get customerId; double get amount; String? get refInvoiceId; String? get note; String get createdBy; String? get updatedBy; DateTime get createdAt; DateTime? get updatedAt;
+@JsonKey(name: '_id', includeIfNull: false) String? get id; String get sellerId; String get customerId; double get amount; String? get refInvoiceId; String? get note; String get createdBy; String? get updatedBy;@DateTimeConverter() DateTime get createdAt;@DateTimeConverter() DateTime? get updatedAt;
 /// Create a copy of WalletTransaction
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -5971,7 +5971,7 @@ abstract mixin class $WalletTransactionCopyWith<$Res>  {
   factory $WalletTransactionCopyWith(WalletTransaction value, $Res Function(WalletTransaction) _then) = _$WalletTransactionCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, String customerId, double amount, String? refInvoiceId, String? note, String createdBy, String? updatedBy, DateTime createdAt, DateTime? updatedAt
+@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, String customerId, double amount, String? refInvoiceId, String? note, String createdBy, String? updatedBy,@DateTimeConverter() DateTime createdAt,@DateTimeConverter() DateTime? updatedAt
 });
 
 
@@ -6085,7 +6085,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String customerId,  double amount,  String? refInvoiceId,  String? note,  String createdBy,  String? updatedBy,  DateTime createdAt,  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String customerId,  double amount,  String? refInvoiceId,  String? note,  String createdBy,  String? updatedBy, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _WalletTransaction() when $default != null:
 return $default(_that.id,_that.sellerId,_that.customerId,_that.amount,_that.refInvoiceId,_that.note,_that.createdBy,_that.updatedBy,_that.createdAt,_that.updatedAt);case _:
@@ -6106,7 +6106,7 @@ return $default(_that.id,_that.sellerId,_that.customerId,_that.amount,_that.refI
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String customerId,  double amount,  String? refInvoiceId,  String? note,  String createdBy,  String? updatedBy,  DateTime createdAt,  DateTime? updatedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String customerId,  double amount,  String? refInvoiceId,  String? note,  String createdBy,  String? updatedBy, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)  $default,) {final _that = this;
 switch (_that) {
 case _WalletTransaction():
 return $default(_that.id,_that.sellerId,_that.customerId,_that.amount,_that.refInvoiceId,_that.note,_that.createdBy,_that.updatedBy,_that.createdAt,_that.updatedAt);case _:
@@ -6126,7 +6126,7 @@ return $default(_that.id,_that.sellerId,_that.customerId,_that.amount,_that.refI
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String customerId,  double amount,  String? refInvoiceId,  String? note,  String createdBy,  String? updatedBy,  DateTime createdAt,  DateTime? updatedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String customerId,  double amount,  String? refInvoiceId,  String? note,  String createdBy,  String? updatedBy, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)?  $default,) {final _that = this;
 switch (_that) {
 case _WalletTransaction() when $default != null:
 return $default(_that.id,_that.sellerId,_that.customerId,_that.amount,_that.refInvoiceId,_that.note,_that.createdBy,_that.updatedBy,_that.createdAt,_that.updatedAt);case _:
@@ -6141,7 +6141,7 @@ return $default(_that.id,_that.sellerId,_that.customerId,_that.amount,_that.refI
 @JsonSerializable()
 
 class _WalletTransaction implements WalletTransaction {
-  const _WalletTransaction({@JsonKey(name: '_id', includeIfNull: false) this.id, required this.sellerId, required this.customerId, required this.amount, this.refInvoiceId, this.note, required this.createdBy, this.updatedBy, required this.createdAt, this.updatedAt});
+  const _WalletTransaction({@JsonKey(name: '_id', includeIfNull: false) this.id, required this.sellerId, required this.customerId, required this.amount, this.refInvoiceId, this.note, required this.createdBy, this.updatedBy, @DateTimeConverter() required this.createdAt, @DateTimeConverter() this.updatedAt});
   factory _WalletTransaction.fromJson(Map<String, dynamic> json) => _$WalletTransactionFromJson(json);
 
 @override@JsonKey(name: '_id', includeIfNull: false) final  String? id;
@@ -6152,8 +6152,8 @@ class _WalletTransaction implements WalletTransaction {
 @override final  String? note;
 @override final  String createdBy;
 @override final  String? updatedBy;
-@override final  DateTime createdAt;
-@override final  DateTime? updatedAt;
+@override@DateTimeConverter() final  DateTime createdAt;
+@override@DateTimeConverter() final  DateTime? updatedAt;
 
 /// Create a copy of WalletTransaction
 /// with the given fields replaced by the non-null parameter values.
@@ -6188,7 +6188,7 @@ abstract mixin class _$WalletTransactionCopyWith<$Res> implements $WalletTransac
   factory _$WalletTransactionCopyWith(_WalletTransaction value, $Res Function(_WalletTransaction) _then) = __$WalletTransactionCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, String customerId, double amount, String? refInvoiceId, String? note, String createdBy, String? updatedBy, DateTime createdAt, DateTime? updatedAt
+@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, String customerId, double amount, String? refInvoiceId, String? note, String createdBy, String? updatedBy,@DateTimeConverter() DateTime createdAt,@DateTimeConverter() DateTime? updatedAt
 });
 
 

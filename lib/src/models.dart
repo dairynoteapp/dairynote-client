@@ -523,6 +523,7 @@ abstract class UserInfo with _$UserInfo {
     required String id, // String
     required Role role,
     String? sellerId,
+    String? supplierId,
     required String phone,
     String? name,
     String? dairy,
@@ -533,6 +534,7 @@ abstract class UserInfo with _$UserInfo {
     SellerSettings? seSettings,
     SupplierSettings? suSettings,
     required bool active,
+     DateTime? createdAt,
   }) = _UserInfo;
 
   factory UserInfo.fromJson(Map<String, dynamic> json) =>

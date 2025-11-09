@@ -15,4 +15,7 @@ abstract class PricingRepository {
 
   @GET('/pricings')
   Future<List<Pricing>> list(@Query('sellerId') String sellerId);
+
+  @POST('/pricings/ids')
+  Future<List<Pricing>> listByIds(@Field() List<String> ids);
 }

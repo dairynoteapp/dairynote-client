@@ -581,6 +581,7 @@ _UserInfo _$UserInfoFromJson(Map<String, dynamic> json) => _UserInfo(
   id: json['id'] as String,
   role: $enumDecode(_$RoleEnumMap, json['role']),
   sellerId: json['sellerId'] as String?,
+  supplierId: json['supplierId'] as String?,
   phone: json['phone'] as String,
   name: json['name'] as String?,
   dairy: json['dairy'] as String?,
@@ -601,12 +602,16 @@ _UserInfo _$UserInfoFromJson(Map<String, dynamic> json) => _UserInfo(
       ? null
       : SupplierSettings.fromJson(json['suSettings'] as Map<String, dynamic>),
   active: json['active'] as bool,
+  createdAt: json['createdAt'] == null
+      ? null
+      : DateTime.parse(json['createdAt'] as String),
 );
 
 Map<String, dynamic> _$UserInfoToJson(_UserInfo instance) => <String, dynamic>{
   'id': instance.id,
   'role': _$RoleEnumMap[instance.role]!,
   'sellerId': instance.sellerId,
+  'supplierId': instance.supplierId,
   'phone': instance.phone,
   'name': instance.name,
   'dairy': instance.dairy,
@@ -617,6 +622,7 @@ Map<String, dynamic> _$UserInfoToJson(_UserInfo instance) => <String, dynamic>{
   'seSettings': instance.seSettings,
   'suSettings': instance.suSettings,
   'active': instance.active,
+  'createdAt': instance.createdAt?.toIso8601String(),
 };
 
 const _$RoleEnumMap = {

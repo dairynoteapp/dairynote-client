@@ -166,6 +166,7 @@ const _$PaymentMethodEnumMap = {
   PaymentMethod.cash: 'cash',
   PaymentMethod.upi: 'upi',
   PaymentMethod.wallet: 'wallet',
+  PaymentMethod.online: 'online',
 };
 
 const _$PaymentStatusEnumMap = {

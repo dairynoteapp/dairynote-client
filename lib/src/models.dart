@@ -70,6 +70,8 @@ enum PaymentMethod {
   upi,
   @JsonValue('wallet')
   wallet,
+  @JsonValue('online')
+  online,
 }
 
 enum PaymentStatus {

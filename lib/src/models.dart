@@ -106,6 +106,8 @@ enum RateType {
 enum Role {
   @JsonValue('unknown')
   unknown,
+  @JsonValue('admin')
+  admin,
   @JsonValue('seller')
   seller,
   @JsonValue('supplier')

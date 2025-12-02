@@ -136,7 +136,7 @@ class ItemMapConverter
   Map<Item, double> fromJson(Map<String, dynamic> json) {
     return json.map((key, value) {
       final item = Item.values.firstWhere(
-        (e) => e.toString().split('.').last == key,
+        (e) => e.name == key,
         orElse: () => Item.unknown, // Handle unknown items gracefully
       );
       return MapEntry(item, (value as num).toDouble());
@@ -146,7 +146,7 @@ class ItemMapConverter
   @override
   Map<String, dynamic> toJson(Map<Item, double> object) {
     return object.map(
-      (key, value) => MapEntry(key.toString().split('.').last, value),
+      (key, value) => MapEntry(key.name, value),
     );
   }
 }

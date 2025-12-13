@@ -74,6 +74,7 @@ const _$ItemEnumMap = {
   Item.buffaloMilk: 'buffaloMilk',
   Item.standardMilk: 'standardMilk',
   Item.mixedMilk: 'mixedMilk',
+  Item.other: 'other',
 };
 
 const _$PeriodEnumMap = {
@@ -183,6 +184,7 @@ _Delivery _$DeliveryFromJson(Map<String, dynamic> json) => _Delivery(
   price: (json['price'] as num).toDouble(),
   quantity: (json['quantity'] as num).toDouble(),
   total: (json['total'] as num).toDouble(),
+  productId: json['productId'] as String?,
   deliveredAt: const DateTimeConverter().fromJson(
     json['deliveredAt'] as String,
   ),
@@ -206,6 +208,7 @@ Map<String, dynamic> _$DeliveryToJson(_Delivery instance) => <String, dynamic>{
   'price': instance.price,
   'quantity': instance.quantity,
   'total': instance.total,
+  'productId': instance.productId,
   'deliveredAt': const DateTimeConverter().toJson(instance.deliveredAt),
   'status': _$DeliveryStatusEnumMap[instance.status]!,
   'locked': instance.locked,
@@ -386,6 +389,58 @@ Map<String, dynamic> _$PricingToJson(_Pricing instance) => <String, dynamic>{
   ),
 };
 
+_Product _$ProductFromJson(Map<String, dynamic> json) => _Product(
+  id: json['_id'] as String?,
+  sellerId: json['sellerId'] as String,
+  name: json['name'] as String,
+  price: (json['price'] as num).toDouble(),
+  unit: $enumDecode(_$ProductUnitEnumMap, json['unit']),
+  active: json['active'] as bool? ?? true,
+  createdAt: const DateTimeConverter().fromJson(json['createdAt'] as String),
+  updatedAt: _$JsonConverterFromJson<String, DateTime>(
+    json['updatedAt'],
+    const DateTimeConverter().fromJson,
+  ),
+);
+
+Map<String, dynamic> _$ProductToJson(_Product instance) => <String, dynamic>{
+  '_id': ?instance.id,
+  'sellerId': instance.sellerId,
+  'name': instance.name,
+  'price': instance.price,
+  'unit': _$ProductUnitEnumMap[instance.unit]!,
+  'active': instance.active,
+  'createdAt': const DateTimeConverter().toJson(instance.createdAt),
+  'updatedAt': _$JsonConverterToJson<String, DateTime>(
+    instance.updatedAt,
+    const DateTimeConverter().toJson,
+  ),
+};
+
+const _$ProductUnitEnumMap = {
+  ProductUnit.ltr: 'ltr',
+  ProductUnit.ml: 'ml',
+  ProductUnit.g: 'g',
+  ProductUnit.kg: 'kg',
+  ProductUnit.pkt: 'pkt',
+  ProductUnit.btl: 'btl',
+  ProductUnit.can: 'can',
+  ProductUnit.jar: 'jar',
+  ProductUnit.tin: 'tin',
+  ProductUnit.box: 'box',
+  ProductUnit.pch: 'pch',
+  ProductUnit.cup: 'cup',
+  ProductUnit.tub: 'tub',
+  ProductUnit.rl: 'rl',
+  ProductUnit.tray: 'try',
+  ProductUnit.ctn: 'ctn',
+  ProductUnit.crt: 'crt',
+  ProductUnit.drm: 'drm',
+  ProductUnit.pc: 'pc',
+  ProductUnit.set: 'set',
+  ProductUnit.other: 'other',
+};
+
 _RateChartStep _$RateChartStepFromJson(Map<String, dynamic> json) =>
     _RateChartStep(
       value: (json['value'] as num).toDouble(),
@@ -469,12 +524,14 @@ _SellerSettings _$SellerSettingsFromJson(Map<String, dynamic> json) =>
     _SellerSettings(
       collection: json['collection'] as bool,
       delivery: json['delivery'] as bool,
+      products: json['products'] as bool?,
     );
 
 Map<String, dynamic> _$SellerSettingsToJson(_SellerSettings instance) =>
     <String, dynamic>{
       'collection': instance.collection,
       'delivery': instance.delivery,
+      'products': instance.products,
     };
 
 _SuReturn _$SuReturnFromJson(Map<String, dynamic> json) => _SuReturn(

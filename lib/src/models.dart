@@ -243,6 +243,7 @@ abstract class CollectionEntry with _$CollectionEntry {
   factory CollectionEntry.fromJson(Map<String, dynamic> json) =>
       _$CollectionEntryFromJson(json);
 
+  @override
   Map<String, dynamic> toJson() =>
       _$CollectionEntryToJson(this as _CollectionEntry);
 }

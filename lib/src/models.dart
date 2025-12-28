@@ -7,9 +7,6 @@ part 'models.g.dart';
 
 // --- Enums ---
 
-
-
-
 enum DeliveryStatus {
   @JsonValue('pending')
   pending,
@@ -59,6 +56,11 @@ enum Item {
   standardMilk,
   @JsonValue('mixedMilk')
   mixedMilk,
+  @JsonValue('other')
+  other;
+
+  static const milks = [cowMilk, buffaloMilk, standardMilk, mixedMilk]; 
+  static const all = [cowMilk, buffaloMilk, standardMilk, mixedMilk, other]; 
 }
 
 enum PaymentMethod {
@@ -127,6 +129,51 @@ enum Unit {
   ml,
 }
 
+enum ProductUnit {
+  @JsonValue('ltr')
+  ltr,
+  @JsonValue('ml')
+  ml,
+  @JsonValue('g')
+  g,
+  @JsonValue('kg')
+  kg,
+  @JsonValue('pkt')
+  pkt,
+  @JsonValue('btl')
+  btl,
+  @JsonValue('can')
+  can,
+  @JsonValue('jar')
+  jar,
+  @JsonValue('tin')
+  tin,
+  @JsonValue('box')
+  box,
+  @JsonValue('pch')
+  pch,
+  @JsonValue('cup')
+  cup,
+  @JsonValue('tub')
+  tub,
+  @JsonValue('rl')
+  rl,
+  @JsonValue('try')
+  tray,
+  @JsonValue('ctn')
+  ctn,
+  @JsonValue('crt')
+  crt,
+  @JsonValue('drm')
+  drm,
+  @JsonValue('pc')
+  pc,
+  @JsonValue('set')
+  set,
+  @JsonValue('other')
+  other,
+}
+
 // --- Converters (if strictly needed, usually for complex types or mapping specific strings) ---
 class ItemMapConverter
     implements JsonConverter<Map<Item, double>, Map<String, dynamic>> {
@@ -145,12 +192,9 @@ class ItemMapConverter
 
   @override
   Map<String, dynamic> toJson(Map<Item, double> object) {
-    return object.map(
-      (key, value) => MapEntry(key.name, value),
-    );
+    return object.map((key, value) => MapEntry(key.name, value));
   }
 }
-
 
 class DateTimeConverter implements JsonConverter<DateTime, String> {
   const DateTimeConverter();
@@ -190,19 +234,16 @@ abstract class CollectionEntry with _$CollectionEntry {
     required double rate,
     required double quantity,
     required double total,
-    @DateTimeConverter()
-    required DateTime collectedAt,
+    @DateTimeConverter() required DateTime collectedAt,
     @Default(false) bool locked,
-    @DateTimeConverter()
-    required DateTime createdAt,
-    @DateTimeConverter()
-    DateTime? updatedAt,
+    @DateTimeConverter() required DateTime createdAt,
+    @DateTimeConverter() DateTime? updatedAt,
   }) = _CollectionEntry;
 
   factory CollectionEntry.fromJson(Map<String, dynamic> json) =>
       _$CollectionEntryFromJson(json);
 
-
+  @override
   Map<String, dynamic> toJson() =>
       _$CollectionEntryToJson(this as _CollectionEntry);
 }
@@ -213,10 +254,8 @@ abstract class Collection with _$Collection {
     required Item item,
     required RateType rateType,
     double? rate,
-    @DateTimeConverter()
-    required DateTime createdAt,
-    @DateTimeConverter()
-    DateTime? updatedAt,
+    @DateTimeConverter() required DateTime createdAt,
+    @DateTimeConverter() DateTime? updatedAt,
   }) = _Collection;
 
   factory Collection.fromJson(Map<String, dynamic> json) =>
@@ -260,14 +299,12 @@ abstract class Delivery with _$Delivery {
     required double price,
     required double quantity,
     required double total,
-    @DateTimeConverter()
-    required DateTime deliveredAt,
+    String? productId, // in case of Item.other
+    @DateTimeConverter() required DateTime deliveredAt,
     @Default(DeliveryStatus.pending) DeliveryStatus status,
     required bool locked,
-    @DateTimeConverter()
-    required DateTime createdAt,
-    @DateTimeConverter()
-    DateTime? updatedAt,
+    @DateTimeConverter() required DateTime createdAt,
+    @DateTimeConverter() DateTime? updatedAt,
   }) = _Delivery;
 
   factory Delivery.fromJson(Map<String, dynamic> json) =>
@@ -283,13 +320,10 @@ abstract class Dispatch with _$Dispatch {
     required String supplierId,
     @ItemMapConverter()
     required Map<Item, double> items, // Use converter for Item keys
-    @DateTimeConverter()
-    required DateTime dispatchedAt,
+    @DateTimeConverter() required DateTime dispatchedAt,
     @Default(DispatchStatus.pending) DispatchStatus status,
-    @DateTimeConverter()
-    required DateTime createdAt,
-    @DateTimeConverter()
-    DateTime? updatedAt,
+    @DateTimeConverter() required DateTime createdAt,
+    @DateTimeConverter() DateTime? updatedAt,
   }) = _Dispatch;
 
   factory Dispatch.fromJson(Map<String, dynamic> json) =>
@@ -304,17 +338,13 @@ abstract class FarmerPayment with _$FarmerPayment {
     required String sellerId,
     required String farmerId,
     required double total,
-    @DateTimeConverter()
-    required DateTime from,
-    @DateTimeConverter()
-    required DateTime to,
+    @DateTimeConverter() required DateTime from,
+    @DateTimeConverter() required DateTime to,
     required List<String> collectionIds, // List<String> is List<String>
     required String createdBy,
     String? updatedBy,
-    @DateTimeConverter()
-    required DateTime createdAt,
-    @DateTimeConverter()
-    DateTime? updatedAt,
+    @DateTimeConverter() required DateTime createdAt,
+    @DateTimeConverter() DateTime? updatedAt,
   }) = _FarmerPayment;
 
   factory FarmerPayment.fromJson(Map<String, dynamic> json) =>
@@ -343,20 +373,16 @@ abstract class Invoice with _$Invoice {
     required String customerId,
     String? supplierId,
     required double total,
-    @DateTimeConverter()
-    required DateTime from,
-    @DateTimeConverter()
-    required DateTime to,
+    @DateTimeConverter() required DateTime from,
+    @DateTimeConverter() required DateTime to,
     @Default(0) double paid,
     @Default(0) double pending,
     @Default(InvoiceStatus.pending) InvoiceStatus status,
     required List<String> deliveryIds, // List<String> is List<String>
     required String createdBy,
     String? updatedBy,
-    @DateTimeConverter()
-    required DateTime createdAt,
-    @DateTimeConverter()
-    DateTime? updatedAt,
+    @DateTimeConverter() required DateTime createdAt,
+    @DateTimeConverter() DateTime? updatedAt,
   }) = _Invoice;
 
   factory Invoice.fromJson(Map<String, dynamic> json) =>
@@ -371,15 +397,31 @@ abstract class Pricing with _$Pricing {
     required String sellerId,
     required Item item,
     required double price,
-    @DateTimeConverter()
-    required DateTime createdAt,
-    @DateTimeConverter()
-    DateTime? updatedAt,
+    @DateTimeConverter() required DateTime createdAt,
+    @DateTimeConverter() DateTime? updatedAt,
   }) = _Pricing;
 
   factory Pricing.fromJson(Map<String, dynamic> json) =>
       _$PricingFromJson(json);
   Map<String, dynamic> toJson() => _$PricingToJson(this as _Pricing);
+}
+
+@freezed
+abstract class Product with _$Product {
+  const factory Product({
+    @JsonKey(name: '_id', includeIfNull: false) String? id,
+    required String sellerId,
+    required String name,
+    required double price,
+    required ProductUnit unit,
+    @Default(true) bool active,
+    @DateTimeConverter() required DateTime createdAt,
+    @DateTimeConverter() DateTime? updatedAt,
+  }) = _Product;
+
+  factory Product.fromJson(Map<String, dynamic> json) =>
+      _$ProductFromJson(json);
+  Map<String, dynamic> toJson() => _$ProductToJson(this as _Product);
 }
 
 @freezed
@@ -404,10 +446,8 @@ abstract class RateChart with _$RateChart {
     List<RateChartStep>? snfSteps,
     required Map<String, Map<String, double>>
     data, // Map<String,Map<String,double>>
-    @DateTimeConverter()
-    required DateTime createdAt,
-    @DateTimeConverter()
-    DateTime? updatedAt,
+    @DateTimeConverter() required DateTime createdAt,
+    @DateTimeConverter() DateTime? updatedAt,
   }) = _RateChart;
 
   factory RateChart.fromJson(Map<String, dynamic> json) =>
@@ -425,10 +465,8 @@ abstract class Sale with _$Sale {
     required double price,
     required double quantity,
     required double total,
-    @DateTimeConverter()
-    required DateTime soldAt,
-    @DateTimeConverter()
-    required DateTime createdAt,
+    @DateTimeConverter() required DateTime soldAt,
+    @DateTimeConverter() required DateTime createdAt,
     DateTime? updatedAt,
   }) = _Sale;
 
@@ -441,6 +479,7 @@ abstract class SellerSettings with _$SellerSettings {
   const factory SellerSettings({
     required bool collection,
     required bool delivery,
+     bool? products,
   }) = _SellerSettings;
 
   factory SellerSettings.fromJson(Map<String, dynamic> json) =>
@@ -457,12 +496,9 @@ abstract class SuReturn with _$SuReturn {
     required String supplierId,
     @ItemMapConverter()
     required Map<Item, double> items, // Use converter for Item keys
-    @DateTimeConverter()
-    required DateTime returnedAt,
-    @DateTimeConverter()
-    required DateTime createdAt,
-    @DateTimeConverter()
-    DateTime? updatedAt,
+    @DateTimeConverter() required DateTime returnedAt,
+    @DateTimeConverter() required DateTime createdAt,
+    @DateTimeConverter() DateTime? updatedAt,
   }) = _SuReturn;
 
   factory SuReturn.fromJson(Map<String, dynamic> json) =>
@@ -478,10 +514,8 @@ abstract class Subscription with _$Subscription {
     required Unit unit,
     required String pricingId, // String is String
     required bool active,
-    @DateTimeConverter()
-    required DateTime createdAt,
-    @DateTimeConverter()
-    DateTime? updatedAt,
+    @DateTimeConverter() required DateTime createdAt,
+    @DateTimeConverter() DateTime? updatedAt,
   }) = _Subscription;
 
   factory Subscription.fromJson(Map<String, dynamic> json) =>
@@ -497,10 +531,8 @@ abstract class SupplierDay with _$SupplierDay {
     required String supplierId,
     required bool freez,
     DateTime? startedAt,
-    @DateTimeConverter()
-    required DateTime createdAt,
-    @DateTimeConverter()
-    DateTime? updatedAt,
+    @DateTimeConverter() required DateTime createdAt,
+    @DateTimeConverter() DateTime? updatedAt,
   }) = _SupplierDay;
 
   factory SupplierDay.fromJson(Map<String, dynamic> json) =>
@@ -538,7 +570,7 @@ abstract class UserInfo with _$UserInfo {
     SellerSettings? seSettings,
     SupplierSettings? suSettings,
     required bool active,
-     DateTime? createdAt,
+    DateTime? createdAt,
   }) = _UserInfo;
 
   factory UserInfo.fromJson(Map<String, dynamic> json) =>
@@ -568,8 +600,7 @@ abstract class User with _$User {
     SellerSettings? seSettings,
     SupplierSettings? suSettings,
     @Default(true) bool active,
-    @DateTimeConverter()
-    required DateTime createdAt,
+    @DateTimeConverter() required DateTime createdAt,
     DateTime? updatedAt,
   }) = _User;
 
@@ -588,10 +619,8 @@ abstract class WalletTransaction with _$WalletTransaction {
     String? note,
     required String createdBy,
     String? updatedBy,
-    @DateTimeConverter()
-    required DateTime createdAt,
-    @DateTimeConverter()
-    DateTime? updatedAt,
+    @DateTimeConverter() required DateTime createdAt,
+    @DateTimeConverter() DateTime? updatedAt,
   }) = _WalletTransaction;
 
   factory WalletTransaction.fromJson(Map<String, dynamic> json) =>

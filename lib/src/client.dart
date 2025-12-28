@@ -8,6 +8,7 @@ import 'package:dairynote_client/src/repositories/dispatch_repository.dart';
 import 'package:dairynote_client/src/repositories/farmer_payment_repository.dart';
 import 'package:dairynote_client/src/repositories/invoice_repository.dart';
 import 'package:dairynote_client/src/repositories/pricing_repository.dart';
+import 'package:dairynote_client/src/repositories/product_repository.dart';
 import 'package:dairynote_client/src/repositories/ratechart_repository.dart';
 import 'package:dairynote_client/src/repositories/sale_repository.dart';
 import 'package:dairynote_client/src/repositories/su_return_repository.dart';
@@ -28,6 +29,7 @@ class ApiClient {
     farmerPayment = FarmerPaymentRepository(_dio);
     invoice = InvoiceRepository(_dio);
     pricing = PricingRepository(_dio);
+    product = ProductRepository(_dio);
     ratechart = RatechartRepository(_dio);
     sale = SaleRepository(_dio);
     suReturn = SuReturnRepository(_dio);
@@ -44,6 +46,7 @@ class ApiClient {
   late final FarmerPaymentRepository farmerPayment;
   late final InvoiceRepository invoice;
   late final PricingRepository pricing;
+  late final ProductRepository product;
   late final RatechartRepository ratechart;
   late final SaleRepository sale;
   late final SuReturnRepository suReturn;

@@ -14,7 +14,7 @@ abstract class WalletRepository {
   Future<WalletTransaction> write(@Body() WalletTransaction transaction);
 
   @GET('/wallet/balance/{customerId}')
-  Future<double> getBalance(@Path('customerId') String customerId);
+  Future<num> getBalance(@Path('customerId') String customerId);
 
   @GET('/wallet')
   Future<List<WalletTransaction>> paginate({

@@ -48,12 +48,12 @@ class _WalletRepository implements WalletRepository {
   }
 
   @override
-  Future<double> getBalance(String customerId) async {
+  Future<num> getBalance(String customerId) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<double>(
+    final _options = _setStreamType<num>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -63,8 +63,8 @@ class _WalletRepository implements WalletRepository {
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch<double>(_options);
-    late double _value;
+    final _result = await _dio.fetch<num>(_options);
+    late num _value;
     try {
       _value = _result.data!;
     } on Object catch (e, s) {

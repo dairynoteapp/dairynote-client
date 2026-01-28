@@ -56,10 +56,12 @@ enum Item {
   standardMilk,
   @JsonValue('mixedMilk')
   mixedMilk,
+  @JsonValue('otherMilk')
+  otherMilk,
   @JsonValue('other')
   other;
 
-  static const milks = [cowMilk, buffaloMilk, standardMilk, mixedMilk]; 
+  static const milks = [cowMilk, buffaloMilk, standardMilk, mixedMilk, otherMilk]; 
   static const all = [cowMilk, buffaloMilk, standardMilk, mixedMilk, other]; 
 }
 

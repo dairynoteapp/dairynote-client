@@ -20,4 +20,7 @@ abstract class SaleRepository {
     @Query('fromDate') required DateTime fromDate,
     @Query('toDate') required DateTime toDate,
   });
+
+  @DELETE('/sales/{id}')
+  Future<void> delete(@Path('id') String id); // Node.js returns 200/404, we'll map bool to void/exception
 }

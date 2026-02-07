@@ -61,7 +61,7 @@ enum Item {
   @JsonValue('other')
   other;
 
-  static const milks = [cowMilk, buffaloMilk, standardMilk, mixedMilk, otherMilk]; 
+  static const milks = [cowMilk, buffaloMilk, standardMilk, mixedMilk]; 
   static const all = [cowMilk, buffaloMilk, standardMilk, mixedMilk, other]; 
 }
 

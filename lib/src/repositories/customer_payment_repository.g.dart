@@ -8,7 +8,7 @@ part of 'customer_payment_repository.dart';
 // RetrofitGenerator
 // **************************************************************************
 
-// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations,unused_element_parameter
+// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations,unused_element_parameter,avoid_unused_constructor_parameters,unreachable_from_main,avoid_redundant_argument_values
 
 class _CustomerPaymentRepository implements CustomerPaymentRepository {
   _CustomerPaymentRepository(this._dio, {this.baseUrl, this.errorLogger});
@@ -41,7 +41,7 @@ class _CustomerPaymentRepository implements CustomerPaymentRepository {
     try {
       _value = CustomerPayment.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
     }
     return _value;
@@ -87,7 +87,7 @@ class _CustomerPaymentRepository implements CustomerPaymentRepository {
           )
           .toList();
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
     }
     return _value;
@@ -133,7 +133,7 @@ class _CustomerPaymentRepository implements CustomerPaymentRepository {
           )
           .toList();
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
     }
     return _value;

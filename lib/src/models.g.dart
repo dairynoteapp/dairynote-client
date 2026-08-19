@@ -74,6 +74,7 @@ const _$ItemEnumMap = {
   Item.buffaloMilk: 'buffaloMilk',
   Item.standardMilk: 'standardMilk',
   Item.mixedMilk: 'mixedMilk',
+  Item.otherMilk: 'otherMilk',
   Item.other: 'other',
 };
 
@@ -270,6 +271,9 @@ _FarmerPayment _$FarmerPaymentFromJson(Map<String, dynamic> json) =>
       sellerId: json['sellerId'] as String,
       farmerId: json['farmerId'] as String,
       total: (json['total'] as num).toDouble(),
+      paid: (json['paid'] as num?)?.toDouble() ?? 0,
+      status: json['status'] as String? ?? 'pending',
+      upiTransactionId: json['upiTransactionId'] as String?,
       from: const DateTimeConverter().fromJson(json['from'] as String),
       to: const DateTimeConverter().fromJson(json['to'] as String),
       collectionIds: (json['collectionIds'] as List<dynamic>)
@@ -292,6 +296,9 @@ Map<String, dynamic> _$FarmerPaymentToJson(_FarmerPayment instance) =>
       'sellerId': instance.sellerId,
       'farmerId': instance.farmerId,
       'total': instance.total,
+      'paid': instance.paid,
+      'status': instance.status,
+      'upiTransactionId': instance.upiTransactionId,
       'from': const DateTimeConverter().toJson(instance.from),
       'to': const DateTimeConverter().toJson(instance.to),
       'collectionIds': instance.collectionIds,
@@ -653,6 +660,7 @@ _UserInfo _$UserInfoFromJson(Map<String, dynamic> json) => _UserInfo(
   expiryAt: json['expiryAt'] == null
       ? null
       : DateTime.parse(json['expiryAt'] as String),
+  isPaused: json['isPaused'] as bool? ?? false,
   seSettings: json['seSettings'] == null
       ? null
       : SellerSettings.fromJson(json['seSettings'] as Map<String, dynamic>),
@@ -677,6 +685,7 @@ Map<String, dynamic> _$UserInfoToJson(_UserInfo instance) => <String, dynamic>{
   'subscriptions': instance.subscriptions,
   'collections': instance.collections,
   'expiryAt': instance.expiryAt?.toIso8601String(),
+  'isPaused': instance.isPaused,
   'seSettings': instance.seSettings,
   'suSettings': instance.suSettings,
   'active': instance.active,
@@ -722,6 +731,7 @@ _User _$UserFromJson(Map<String, dynamic> json) => _User(
       ? null
       : SupplierSettings.fromJson(json['suSettings'] as Map<String, dynamic>),
   active: json['active'] as bool? ?? true,
+  upiId: json['upiId'] as String?,
   createdAt: const DateTimeConverter().fromJson(json['createdAt'] as String),
   updatedAt: json['updatedAt'] == null
       ? null
@@ -748,6 +758,7 @@ Map<String, dynamic> _$UserToJson(_User instance) => <String, dynamic>{
   'seSettings': instance.seSettings,
   'suSettings': instance.suSettings,
   'active': instance.active,
+  'upiId': instance.upiId,
   'createdAt': const DateTimeConverter().toJson(instance.createdAt),
   'updatedAt': instance.updatedAt?.toIso8601String(),
 };

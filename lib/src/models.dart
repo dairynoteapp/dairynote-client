@@ -45,24 +45,6 @@ enum InvoiceStatus {
   pendingApproval,
 }
 
-enum Item {
-  @JsonValue('unknown')
-  unknown,
-  @JsonValue('cowMilk')
-  cowMilk,
-  @JsonValue('buffaloMilk')
-  buffaloMilk,
-  @JsonValue('standardMilk')
-  standardMilk,
-  @JsonValue('mixedMilk')
-  mixedMilk,
-  @JsonValue('other')
-  other;
-
-  static const milks = [cowMilk, buffaloMilk, standardMilk, mixedMilk]; 
-  static const all = [cowMilk, buffaloMilk, standardMilk, mixedMilk, other]; 
-}
-
 enum PaymentMethod {
   @JsonValue('unknown')
   unknown,
@@ -127,6 +109,39 @@ enum Unit {
   ltr,
   @JsonValue('ml')
   ml,
+}
+
+enum Item {
+  @JsonValue('unknown')
+  unknown,
+  @JsonValue('cowMilk')
+  cowMilk,
+  @JsonValue('buffaloMilk')
+  buffaloMilk,
+  @JsonValue('standardMilk')
+  standardMilk,
+  @JsonValue('mixedMilk')
+  mixedMilk,
+  @JsonValue('otherMilk')
+  otherMilk, // ADD THIS
+  @JsonValue('other')
+  other;
+
+  static const milks = [
+    cowMilk,
+    buffaloMilk,
+    standardMilk,
+    mixedMilk,
+    otherMilk,
+  ];
+  static const all = [
+    cowMilk,
+    buffaloMilk,
+    standardMilk,
+    mixedMilk,
+    otherMilk,
+    other,
+  ];
 }
 
 enum ProductUnit {
@@ -290,6 +305,8 @@ abstract class CustomerPayment with _$CustomerPayment {
 
 @freezed
 abstract class Delivery with _$Delivery {
+  const Delivery._();
+
   const factory Delivery({
     @JsonKey(name: '_id', includeIfNull: false) String? id,
     required String sellerId,
@@ -299,13 +316,16 @@ abstract class Delivery with _$Delivery {
     required double price,
     required double quantity,
     required double total,
-    String? productId, // in case of Item.other
+    String? productId,
     @DateTimeConverter() required DateTime deliveredAt,
     @Default(DeliveryStatus.pending) DeliveryStatus status,
     required bool locked,
     @DateTimeConverter() required DateTime createdAt,
     @DateTimeConverter() DateTime? updatedAt,
   }) = _Delivery;
+
+  bool get isMilk => Item.milks.contains(item);
+  bool get isOther => item == Item.other;
 
   factory Delivery.fromJson(Map<String, dynamic> json) =>
       _$DeliveryFromJson(json);
@@ -338,9 +358,12 @@ abstract class FarmerPayment with _$FarmerPayment {
     required String sellerId,
     required String farmerId,
     required double total,
+    @JsonKey(defaultValue: 0) @Default(0) double paid,
+    @JsonKey(defaultValue: 'pending') required String status,
+    String? upiTransactionId,
     @DateTimeConverter() required DateTime from,
     @DateTimeConverter() required DateTime to,
-    required List<String> collectionIds, // List<String> is List<String>
+    required List<String> collectionIds,
     required String createdBy,
     String? updatedBy,
     @DateTimeConverter() required DateTime createdAt,
@@ -479,7 +502,7 @@ abstract class SellerSettings with _$SellerSettings {
   const factory SellerSettings({
     required bool collection,
     required bool delivery,
-     bool? products,
+    bool? products,
   }) = _SellerSettings;
 
   factory SellerSettings.fromJson(Map<String, dynamic> json) =>
@@ -567,6 +590,7 @@ abstract class UserInfo with _$UserInfo {
     List<Subscription>? subscriptions,
     List<Collection>? collections,
     DateTime? expiryAt,
+    @Default(false) bool isPaused,
     SellerSettings? seSettings,
     SupplierSettings? suSettings,
     required bool active,
@@ -600,6 +624,7 @@ abstract class User with _$User {
     SellerSettings? seSettings,
     SupplierSettings? suSettings,
     @Default(true) bool active,
+    String? upiId,
     @DateTimeConverter() required DateTime createdAt,
     DateTime? updatedAt,
   }) = _User;

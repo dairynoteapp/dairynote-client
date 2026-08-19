@@ -1183,8 +1183,7 @@ as DateTime?,
 /// @nodoc
 mixin _$Delivery {
 
-@JsonKey(name: '_id', includeIfNull: false) String? get id; String get sellerId; String get supplierId; String get customerId; Item get item; double get price; double get quantity; double get total; String? get productId;// in case of Item.other
-@DateTimeConverter() DateTime get deliveredAt; DeliveryStatus get status; bool get locked;@DateTimeConverter() DateTime get createdAt;@DateTimeConverter() DateTime? get updatedAt;
+@JsonKey(name: '_id', includeIfNull: false) String? get id; String get sellerId; String get supplierId; String get customerId; Item get item; double get price; double get quantity; double get total; String? get productId;@DateTimeConverter() DateTime get deliveredAt; DeliveryStatus get status; bool get locked;@DateTimeConverter() DateTime get createdAt;@DateTimeConverter() DateTime? get updatedAt;
 /// Create a copy of Delivery
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1390,8 +1389,8 @@ return $default(_that.id,_that.sellerId,_that.supplierId,_that.customerId,_that.
 /// @nodoc
 @JsonSerializable()
 
-class _Delivery implements Delivery {
-  const _Delivery({@JsonKey(name: '_id', includeIfNull: false) this.id, required this.sellerId, required this.supplierId, required this.customerId, required this.item, required this.price, required this.quantity, required this.total, this.productId, @DateTimeConverter() required this.deliveredAt, this.status = DeliveryStatus.pending, required this.locked, @DateTimeConverter() required this.createdAt, @DateTimeConverter() this.updatedAt});
+class _Delivery extends Delivery {
+  const _Delivery({@JsonKey(name: '_id', includeIfNull: false) this.id, required this.sellerId, required this.supplierId, required this.customerId, required this.item, required this.price, required this.quantity, required this.total, this.productId, @DateTimeConverter() required this.deliveredAt, this.status = DeliveryStatus.pending, required this.locked, @DateTimeConverter() required this.createdAt, @DateTimeConverter() this.updatedAt}): super._();
   factory _Delivery.fromJson(Map<String, dynamic> json) => _$DeliveryFromJson(json);
 
 @override@JsonKey(name: '_id', includeIfNull: false) final  String? id;
@@ -1403,7 +1402,6 @@ class _Delivery implements Delivery {
 @override final  double quantity;
 @override final  double total;
 @override final  String? productId;
-// in case of Item.other
 @override@DateTimeConverter() final  DateTime deliveredAt;
 @override@JsonKey() final  DeliveryStatus status;
 @override final  bool locked;
@@ -1779,8 +1777,7 @@ as DateTime?,
 /// @nodoc
 mixin _$FarmerPayment {
 
-@JsonKey(name: '_id', includeIfNull: false) String? get id; String get sellerId; String get farmerId; double get total;@DateTimeConverter() DateTime get from;@DateTimeConverter() DateTime get to; List<String> get collectionIds;// List<String> is List<String>
- String get createdBy; String? get updatedBy;@DateTimeConverter() DateTime get createdAt;@DateTimeConverter() DateTime? get updatedAt;
+@JsonKey(name: '_id', includeIfNull: false) String? get id; String get sellerId; String get farmerId; double get total;@JsonKey(defaultValue: 0) double get paid;@JsonKey(defaultValue: 'pending') String get status; String? get upiTransactionId;@DateTimeConverter() DateTime get from;@DateTimeConverter() DateTime get to; List<String> get collectionIds; String get createdBy; String? get updatedBy;@DateTimeConverter() DateTime get createdAt;@DateTimeConverter() DateTime? get updatedAt;
 /// Create a copy of FarmerPayment
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1793,16 +1790,16 @@ $FarmerPaymentCopyWith<FarmerPayment> get copyWith => _$FarmerPaymentCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is FarmerPayment&&(identical(other.id, id) || other.id == id)&&(identical(other.sellerId, sellerId) || other.sellerId == sellerId)&&(identical(other.farmerId, farmerId) || other.farmerId == farmerId)&&(identical(other.total, total) || other.total == total)&&(identical(other.from, from) || other.from == from)&&(identical(other.to, to) || other.to == to)&&const DeepCollectionEquality().equals(other.collectionIds, collectionIds)&&(identical(other.createdBy, createdBy) || other.createdBy == createdBy)&&(identical(other.updatedBy, updatedBy) || other.updatedBy == updatedBy)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is FarmerPayment&&(identical(other.id, id) || other.id == id)&&(identical(other.sellerId, sellerId) || other.sellerId == sellerId)&&(identical(other.farmerId, farmerId) || other.farmerId == farmerId)&&(identical(other.total, total) || other.total == total)&&(identical(other.paid, paid) || other.paid == paid)&&(identical(other.status, status) || other.status == status)&&(identical(other.upiTransactionId, upiTransactionId) || other.upiTransactionId == upiTransactionId)&&(identical(other.from, from) || other.from == from)&&(identical(other.to, to) || other.to == to)&&const DeepCollectionEquality().equals(other.collectionIds, collectionIds)&&(identical(other.createdBy, createdBy) || other.createdBy == createdBy)&&(identical(other.updatedBy, updatedBy) || other.updatedBy == updatedBy)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,sellerId,farmerId,total,from,to,const DeepCollectionEquality().hash(collectionIds),createdBy,updatedBy,createdAt,updatedAt);
+int get hashCode => Object.hash(runtimeType,id,sellerId,farmerId,total,paid,status,upiTransactionId,from,to,const DeepCollectionEquality().hash(collectionIds),createdBy,updatedBy,createdAt,updatedAt);
 
 @override
 String toString() {
-  return 'FarmerPayment(id: $id, sellerId: $sellerId, farmerId: $farmerId, total: $total, from: $from, to: $to, collectionIds: $collectionIds, createdBy: $createdBy, updatedBy: $updatedBy, createdAt: $createdAt, updatedAt: $updatedAt)';
+  return 'FarmerPayment(id: $id, sellerId: $sellerId, farmerId: $farmerId, total: $total, paid: $paid, status: $status, upiTransactionId: $upiTransactionId, from: $from, to: $to, collectionIds: $collectionIds, createdBy: $createdBy, updatedBy: $updatedBy, createdAt: $createdAt, updatedAt: $updatedAt)';
 }
 
 
@@ -1813,7 +1810,7 @@ abstract mixin class $FarmerPaymentCopyWith<$Res>  {
   factory $FarmerPaymentCopyWith(FarmerPayment value, $Res Function(FarmerPayment) _then) = _$FarmerPaymentCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, String farmerId, double total,@DateTimeConverter() DateTime from,@DateTimeConverter() DateTime to, List<String> collectionIds, String createdBy, String? updatedBy,@DateTimeConverter() DateTime createdAt,@DateTimeConverter() DateTime? updatedAt
+@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, String farmerId, double total,@JsonKey(defaultValue: 0) double paid,@JsonKey(defaultValue: 'pending') String status, String? upiTransactionId,@DateTimeConverter() DateTime from,@DateTimeConverter() DateTime to, List<String> collectionIds, String createdBy, String? updatedBy,@DateTimeConverter() DateTime createdAt,@DateTimeConverter() DateTime? updatedAt
 });
 
 
@@ -1830,13 +1827,16 @@ class _$FarmerPaymentCopyWithImpl<$Res>
 
 /// Create a copy of FarmerPayment
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? sellerId = null,Object? farmerId = null,Object? total = null,Object? from = null,Object? to = null,Object? collectionIds = null,Object? createdBy = null,Object? updatedBy = freezed,Object? createdAt = null,Object? updatedAt = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? sellerId = null,Object? farmerId = null,Object? total = null,Object? paid = null,Object? status = null,Object? upiTransactionId = freezed,Object? from = null,Object? to = null,Object? collectionIds = null,Object? createdBy = null,Object? updatedBy = freezed,Object? createdAt = null,Object? updatedAt = freezed,}) {
   return _then(_self.copyWith(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String?,sellerId: null == sellerId ? _self.sellerId : sellerId // ignore: cast_nullable_to_non_nullable
 as String,farmerId: null == farmerId ? _self.farmerId : farmerId // ignore: cast_nullable_to_non_nullable
 as String,total: null == total ? _self.total : total // ignore: cast_nullable_to_non_nullable
-as double,from: null == from ? _self.from : from // ignore: cast_nullable_to_non_nullable
+as double,paid: null == paid ? _self.paid : paid // ignore: cast_nullable_to_non_nullable
+as double,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as String,upiTransactionId: freezed == upiTransactionId ? _self.upiTransactionId : upiTransactionId // ignore: cast_nullable_to_non_nullable
+as String?,from: null == from ? _self.from : from // ignore: cast_nullable_to_non_nullable
 as DateTime,to: null == to ? _self.to : to // ignore: cast_nullable_to_non_nullable
 as DateTime,collectionIds: null == collectionIds ? _self.collectionIds : collectionIds // ignore: cast_nullable_to_non_nullable
 as List<String>,createdBy: null == createdBy ? _self.createdBy : createdBy // ignore: cast_nullable_to_non_nullable
@@ -1928,10 +1928,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String farmerId,  double total, @DateTimeConverter()  DateTime from, @DateTimeConverter()  DateTime to,  List<String> collectionIds,  String createdBy,  String? updatedBy, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String farmerId,  double total, @JsonKey(defaultValue: 0)  double paid, @JsonKey(defaultValue: 'pending')  String status,  String? upiTransactionId, @DateTimeConverter()  DateTime from, @DateTimeConverter()  DateTime to,  List<String> collectionIds,  String createdBy,  String? updatedBy, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _FarmerPayment() when $default != null:
-return $default(_that.id,_that.sellerId,_that.farmerId,_that.total,_that.from,_that.to,_that.collectionIds,_that.createdBy,_that.updatedBy,_that.createdAt,_that.updatedAt);case _:
+return $default(_that.id,_that.sellerId,_that.farmerId,_that.total,_that.paid,_that.status,_that.upiTransactionId,_that.from,_that.to,_that.collectionIds,_that.createdBy,_that.updatedBy,_that.createdAt,_that.updatedAt);case _:
   return orElse();
 
 }
@@ -1949,10 +1949,10 @@ return $default(_that.id,_that.sellerId,_that.farmerId,_that.total,_that.from,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String farmerId,  double total, @DateTimeConverter()  DateTime from, @DateTimeConverter()  DateTime to,  List<String> collectionIds,  String createdBy,  String? updatedBy, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String farmerId,  double total, @JsonKey(defaultValue: 0)  double paid, @JsonKey(defaultValue: 'pending')  String status,  String? upiTransactionId, @DateTimeConverter()  DateTime from, @DateTimeConverter()  DateTime to,  List<String> collectionIds,  String createdBy,  String? updatedBy, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)  $default,) {final _that = this;
 switch (_that) {
 case _FarmerPayment():
-return $default(_that.id,_that.sellerId,_that.farmerId,_that.total,_that.from,_that.to,_that.collectionIds,_that.createdBy,_that.updatedBy,_that.createdAt,_that.updatedAt);case _:
+return $default(_that.id,_that.sellerId,_that.farmerId,_that.total,_that.paid,_that.status,_that.upiTransactionId,_that.from,_that.to,_that.collectionIds,_that.createdBy,_that.updatedBy,_that.createdAt,_that.updatedAt);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -1969,10 +1969,10 @@ return $default(_that.id,_that.sellerId,_that.farmerId,_that.total,_that.from,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String farmerId,  double total, @DateTimeConverter()  DateTime from, @DateTimeConverter()  DateTime to,  List<String> collectionIds,  String createdBy,  String? updatedBy, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  String sellerId,  String farmerId,  double total, @JsonKey(defaultValue: 0)  double paid, @JsonKey(defaultValue: 'pending')  String status,  String? upiTransactionId, @DateTimeConverter()  DateTime from, @DateTimeConverter()  DateTime to,  List<String> collectionIds,  String createdBy,  String? updatedBy, @DateTimeConverter()  DateTime createdAt, @DateTimeConverter()  DateTime? updatedAt)?  $default,) {final _that = this;
 switch (_that) {
 case _FarmerPayment() when $default != null:
-return $default(_that.id,_that.sellerId,_that.farmerId,_that.total,_that.from,_that.to,_that.collectionIds,_that.createdBy,_that.updatedBy,_that.createdAt,_that.updatedAt);case _:
+return $default(_that.id,_that.sellerId,_that.farmerId,_that.total,_that.paid,_that.status,_that.upiTransactionId,_that.from,_that.to,_that.collectionIds,_that.createdBy,_that.updatedBy,_that.createdAt,_that.updatedAt);case _:
   return null;
 
 }
@@ -1984,13 +1984,16 @@ return $default(_that.id,_that.sellerId,_that.farmerId,_that.total,_that.from,_t
 @JsonSerializable()
 
 class _FarmerPayment implements FarmerPayment {
-  const _FarmerPayment({@JsonKey(name: '_id', includeIfNull: false) this.id, required this.sellerId, required this.farmerId, required this.total, @DateTimeConverter() required this.from, @DateTimeConverter() required this.to, required final  List<String> collectionIds, required this.createdBy, this.updatedBy, @DateTimeConverter() required this.createdAt, @DateTimeConverter() this.updatedAt}): _collectionIds = collectionIds;
+  const _FarmerPayment({@JsonKey(name: '_id', includeIfNull: false) this.id, required this.sellerId, required this.farmerId, required this.total, @JsonKey(defaultValue: 0) this.paid = 0, @JsonKey(defaultValue: 'pending') required this.status, this.upiTransactionId, @DateTimeConverter() required this.from, @DateTimeConverter() required this.to, required final  List<String> collectionIds, required this.createdBy, this.updatedBy, @DateTimeConverter() required this.createdAt, @DateTimeConverter() this.updatedAt}): _collectionIds = collectionIds;
   factory _FarmerPayment.fromJson(Map<String, dynamic> json) => _$FarmerPaymentFromJson(json);
 
 @override@JsonKey(name: '_id', includeIfNull: false) final  String? id;
 @override final  String sellerId;
 @override final  String farmerId;
 @override final  double total;
+@override@JsonKey(defaultValue: 0) final  double paid;
+@override@JsonKey(defaultValue: 'pending') final  String status;
+@override final  String? upiTransactionId;
 @override@DateTimeConverter() final  DateTime from;
 @override@DateTimeConverter() final  DateTime to;
  final  List<String> _collectionIds;
@@ -2000,7 +2003,6 @@ class _FarmerPayment implements FarmerPayment {
   return EqualUnmodifiableListView(_collectionIds);
 }
 
-// List<String> is List<String>
 @override final  String createdBy;
 @override final  String? updatedBy;
 @override@DateTimeConverter() final  DateTime createdAt;
@@ -2019,16 +2021,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FarmerPayment&&(identical(other.id, id) || other.id == id)&&(identical(other.sellerId, sellerId) || other.sellerId == sellerId)&&(identical(other.farmerId, farmerId) || other.farmerId == farmerId)&&(identical(other.total, total) || other.total == total)&&(identical(other.from, from) || other.from == from)&&(identical(other.to, to) || other.to == to)&&const DeepCollectionEquality().equals(other._collectionIds, _collectionIds)&&(identical(other.createdBy, createdBy) || other.createdBy == createdBy)&&(identical(other.updatedBy, updatedBy) || other.updatedBy == updatedBy)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FarmerPayment&&(identical(other.id, id) || other.id == id)&&(identical(other.sellerId, sellerId) || other.sellerId == sellerId)&&(identical(other.farmerId, farmerId) || other.farmerId == farmerId)&&(identical(other.total, total) || other.total == total)&&(identical(other.paid, paid) || other.paid == paid)&&(identical(other.status, status) || other.status == status)&&(identical(other.upiTransactionId, upiTransactionId) || other.upiTransactionId == upiTransactionId)&&(identical(other.from, from) || other.from == from)&&(identical(other.to, to) || other.to == to)&&const DeepCollectionEquality().equals(other._collectionIds, _collectionIds)&&(identical(other.createdBy, createdBy) || other.createdBy == createdBy)&&(identical(other.updatedBy, updatedBy) || other.updatedBy == updatedBy)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,sellerId,farmerId,total,from,to,const DeepCollectionEquality().hash(_collectionIds),createdBy,updatedBy,createdAt,updatedAt);
+int get hashCode => Object.hash(runtimeType,id,sellerId,farmerId,total,paid,status,upiTransactionId,from,to,const DeepCollectionEquality().hash(_collectionIds),createdBy,updatedBy,createdAt,updatedAt);
 
 @override
 String toString() {
-  return 'FarmerPayment(id: $id, sellerId: $sellerId, farmerId: $farmerId, total: $total, from: $from, to: $to, collectionIds: $collectionIds, createdBy: $createdBy, updatedBy: $updatedBy, createdAt: $createdAt, updatedAt: $updatedAt)';
+  return 'FarmerPayment(id: $id, sellerId: $sellerId, farmerId: $farmerId, total: $total, paid: $paid, status: $status, upiTransactionId: $upiTransactionId, from: $from, to: $to, collectionIds: $collectionIds, createdBy: $createdBy, updatedBy: $updatedBy, createdAt: $createdAt, updatedAt: $updatedAt)';
 }
 
 
@@ -2039,7 +2041,7 @@ abstract mixin class _$FarmerPaymentCopyWith<$Res> implements $FarmerPaymentCopy
   factory _$FarmerPaymentCopyWith(_FarmerPayment value, $Res Function(_FarmerPayment) _then) = __$FarmerPaymentCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, String farmerId, double total,@DateTimeConverter() DateTime from,@DateTimeConverter() DateTime to, List<String> collectionIds, String createdBy, String? updatedBy,@DateTimeConverter() DateTime createdAt,@DateTimeConverter() DateTime? updatedAt
+@JsonKey(name: '_id', includeIfNull: false) String? id, String sellerId, String farmerId, double total,@JsonKey(defaultValue: 0) double paid,@JsonKey(defaultValue: 'pending') String status, String? upiTransactionId,@DateTimeConverter() DateTime from,@DateTimeConverter() DateTime to, List<String> collectionIds, String createdBy, String? updatedBy,@DateTimeConverter() DateTime createdAt,@DateTimeConverter() DateTime? updatedAt
 });
 
 
@@ -2056,13 +2058,16 @@ class __$FarmerPaymentCopyWithImpl<$Res>
 
 /// Create a copy of FarmerPayment
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? sellerId = null,Object? farmerId = null,Object? total = null,Object? from = null,Object? to = null,Object? collectionIds = null,Object? createdBy = null,Object? updatedBy = freezed,Object? createdAt = null,Object? updatedAt = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? sellerId = null,Object? farmerId = null,Object? total = null,Object? paid = null,Object? status = null,Object? upiTransactionId = freezed,Object? from = null,Object? to = null,Object? collectionIds = null,Object? createdBy = null,Object? updatedBy = freezed,Object? createdAt = null,Object? updatedAt = freezed,}) {
   return _then(_FarmerPayment(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String?,sellerId: null == sellerId ? _self.sellerId : sellerId // ignore: cast_nullable_to_non_nullable
 as String,farmerId: null == farmerId ? _self.farmerId : farmerId // ignore: cast_nullable_to_non_nullable
 as String,total: null == total ? _self.total : total // ignore: cast_nullable_to_non_nullable
-as double,from: null == from ? _self.from : from // ignore: cast_nullable_to_non_nullable
+as double,paid: null == paid ? _self.paid : paid // ignore: cast_nullable_to_non_nullable
+as double,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as String,upiTransactionId: freezed == upiTransactionId ? _self.upiTransactionId : upiTransactionId // ignore: cast_nullable_to_non_nullable
+as String?,from: null == from ? _self.from : from // ignore: cast_nullable_to_non_nullable
 as DateTime,to: null == to ? _self.to : to // ignore: cast_nullable_to_non_nullable
 as DateTime,collectionIds: null == collectionIds ? _self._collectionIds : collectionIds // ignore: cast_nullable_to_non_nullable
 as List<String>,createdBy: null == createdBy ? _self.createdBy : createdBy // ignore: cast_nullable_to_non_nullable
@@ -5479,7 +5484,7 @@ as bool,
 mixin _$UserInfo {
 
  String get id;// String
- Role get role; String? get sellerId; String? get supplierId; String get phone; String? get name; String? get dairy; String? get image; List<Subscription>? get subscriptions; List<Collection>? get collections; DateTime? get expiryAt; SellerSettings? get seSettings; SupplierSettings? get suSettings; bool get active; DateTime? get createdAt;
+ Role get role; String? get sellerId; String? get supplierId; String get phone; String? get name; String? get dairy; String? get image; List<Subscription>? get subscriptions; List<Collection>? get collections; DateTime? get expiryAt; bool get isPaused; SellerSettings? get seSettings; SupplierSettings? get suSettings; bool get active; DateTime? get createdAt;
 /// Create a copy of UserInfo
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -5492,16 +5497,16 @@ $UserInfoCopyWith<UserInfo> get copyWith => _$UserInfoCopyWithImpl<UserInfo>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserInfo&&(identical(other.id, id) || other.id == id)&&(identical(other.role, role) || other.role == role)&&(identical(other.sellerId, sellerId) || other.sellerId == sellerId)&&(identical(other.supplierId, supplierId) || other.supplierId == supplierId)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.name, name) || other.name == name)&&(identical(other.dairy, dairy) || other.dairy == dairy)&&(identical(other.image, image) || other.image == image)&&const DeepCollectionEquality().equals(other.subscriptions, subscriptions)&&const DeepCollectionEquality().equals(other.collections, collections)&&(identical(other.expiryAt, expiryAt) || other.expiryAt == expiryAt)&&(identical(other.seSettings, seSettings) || other.seSettings == seSettings)&&(identical(other.suSettings, suSettings) || other.suSettings == suSettings)&&(identical(other.active, active) || other.active == active)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserInfo&&(identical(other.id, id) || other.id == id)&&(identical(other.role, role) || other.role == role)&&(identical(other.sellerId, sellerId) || other.sellerId == sellerId)&&(identical(other.supplierId, supplierId) || other.supplierId == supplierId)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.name, name) || other.name == name)&&(identical(other.dairy, dairy) || other.dairy == dairy)&&(identical(other.image, image) || other.image == image)&&const DeepCollectionEquality().equals(other.subscriptions, subscriptions)&&const DeepCollectionEquality().equals(other.collections, collections)&&(identical(other.expiryAt, expiryAt) || other.expiryAt == expiryAt)&&(identical(other.isPaused, isPaused) || other.isPaused == isPaused)&&(identical(other.seSettings, seSettings) || other.seSettings == seSettings)&&(identical(other.suSettings, suSettings) || other.suSettings == suSettings)&&(identical(other.active, active) || other.active == active)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,role,sellerId,supplierId,phone,name,dairy,image,const DeepCollectionEquality().hash(subscriptions),const DeepCollectionEquality().hash(collections),expiryAt,seSettings,suSettings,active,createdAt);
+int get hashCode => Object.hash(runtimeType,id,role,sellerId,supplierId,phone,name,dairy,image,const DeepCollectionEquality().hash(subscriptions),const DeepCollectionEquality().hash(collections),expiryAt,isPaused,seSettings,suSettings,active,createdAt);
 
 @override
 String toString() {
-  return 'UserInfo(id: $id, role: $role, sellerId: $sellerId, supplierId: $supplierId, phone: $phone, name: $name, dairy: $dairy, image: $image, subscriptions: $subscriptions, collections: $collections, expiryAt: $expiryAt, seSettings: $seSettings, suSettings: $suSettings, active: $active, createdAt: $createdAt)';
+  return 'UserInfo(id: $id, role: $role, sellerId: $sellerId, supplierId: $supplierId, phone: $phone, name: $name, dairy: $dairy, image: $image, subscriptions: $subscriptions, collections: $collections, expiryAt: $expiryAt, isPaused: $isPaused, seSettings: $seSettings, suSettings: $suSettings, active: $active, createdAt: $createdAt)';
 }
 
 
@@ -5512,7 +5517,7 @@ abstract mixin class $UserInfoCopyWith<$Res>  {
   factory $UserInfoCopyWith(UserInfo value, $Res Function(UserInfo) _then) = _$UserInfoCopyWithImpl;
 @useResult
 $Res call({
- String id, Role role, String? sellerId, String? supplierId, String phone, String? name, String? dairy, String? image, List<Subscription>? subscriptions, List<Collection>? collections, DateTime? expiryAt, SellerSettings? seSettings, SupplierSettings? suSettings, bool active, DateTime? createdAt
+ String id, Role role, String? sellerId, String? supplierId, String phone, String? name, String? dairy, String? image, List<Subscription>? subscriptions, List<Collection>? collections, DateTime? expiryAt, bool isPaused, SellerSettings? seSettings, SupplierSettings? suSettings, bool active, DateTime? createdAt
 });
 
 
@@ -5529,7 +5534,7 @@ class _$UserInfoCopyWithImpl<$Res>
 
 /// Create a copy of UserInfo
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? role = null,Object? sellerId = freezed,Object? supplierId = freezed,Object? phone = null,Object? name = freezed,Object? dairy = freezed,Object? image = freezed,Object? subscriptions = freezed,Object? collections = freezed,Object? expiryAt = freezed,Object? seSettings = freezed,Object? suSettings = freezed,Object? active = null,Object? createdAt = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? role = null,Object? sellerId = freezed,Object? supplierId = freezed,Object? phone = null,Object? name = freezed,Object? dairy = freezed,Object? image = freezed,Object? subscriptions = freezed,Object? collections = freezed,Object? expiryAt = freezed,Object? isPaused = null,Object? seSettings = freezed,Object? suSettings = freezed,Object? active = null,Object? createdAt = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,role: null == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
@@ -5542,7 +5547,8 @@ as String?,image: freezed == image ? _self.image : image // ignore: cast_nullabl
 as String?,subscriptions: freezed == subscriptions ? _self.subscriptions : subscriptions // ignore: cast_nullable_to_non_nullable
 as List<Subscription>?,collections: freezed == collections ? _self.collections : collections // ignore: cast_nullable_to_non_nullable
 as List<Collection>?,expiryAt: freezed == expiryAt ? _self.expiryAt : expiryAt // ignore: cast_nullable_to_non_nullable
-as DateTime?,seSettings: freezed == seSettings ? _self.seSettings : seSettings // ignore: cast_nullable_to_non_nullable
+as DateTime?,isPaused: null == isPaused ? _self.isPaused : isPaused // ignore: cast_nullable_to_non_nullable
+as bool,seSettings: freezed == seSettings ? _self.seSettings : seSettings // ignore: cast_nullable_to_non_nullable
 as SellerSettings?,suSettings: freezed == suSettings ? _self.suSettings : suSettings // ignore: cast_nullable_to_non_nullable
 as SupplierSettings?,active: null == active ? _self.active : active // ignore: cast_nullable_to_non_nullable
 as bool,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
@@ -5655,10 +5661,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  Role role,  String? sellerId,  String? supplierId,  String phone,  String? name,  String? dairy,  String? image,  List<Subscription>? subscriptions,  List<Collection>? collections,  DateTime? expiryAt,  SellerSettings? seSettings,  SupplierSettings? suSettings,  bool active,  DateTime? createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  Role role,  String? sellerId,  String? supplierId,  String phone,  String? name,  String? dairy,  String? image,  List<Subscription>? subscriptions,  List<Collection>? collections,  DateTime? expiryAt,  bool isPaused,  SellerSettings? seSettings,  SupplierSettings? suSettings,  bool active,  DateTime? createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _UserInfo() when $default != null:
-return $default(_that.id,_that.role,_that.sellerId,_that.supplierId,_that.phone,_that.name,_that.dairy,_that.image,_that.subscriptions,_that.collections,_that.expiryAt,_that.seSettings,_that.suSettings,_that.active,_that.createdAt);case _:
+return $default(_that.id,_that.role,_that.sellerId,_that.supplierId,_that.phone,_that.name,_that.dairy,_that.image,_that.subscriptions,_that.collections,_that.expiryAt,_that.isPaused,_that.seSettings,_that.suSettings,_that.active,_that.createdAt);case _:
   return orElse();
 
 }
@@ -5676,10 +5682,10 @@ return $default(_that.id,_that.role,_that.sellerId,_that.supplierId,_that.phone,
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  Role role,  String? sellerId,  String? supplierId,  String phone,  String? name,  String? dairy,  String? image,  List<Subscription>? subscriptions,  List<Collection>? collections,  DateTime? expiryAt,  SellerSettings? seSettings,  SupplierSettings? suSettings,  bool active,  DateTime? createdAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  Role role,  String? sellerId,  String? supplierId,  String phone,  String? name,  String? dairy,  String? image,  List<Subscription>? subscriptions,  List<Collection>? collections,  DateTime? expiryAt,  bool isPaused,  SellerSettings? seSettings,  SupplierSettings? suSettings,  bool active,  DateTime? createdAt)  $default,) {final _that = this;
 switch (_that) {
 case _UserInfo():
-return $default(_that.id,_that.role,_that.sellerId,_that.supplierId,_that.phone,_that.name,_that.dairy,_that.image,_that.subscriptions,_that.collections,_that.expiryAt,_that.seSettings,_that.suSettings,_that.active,_that.createdAt);case _:
+return $default(_that.id,_that.role,_that.sellerId,_that.supplierId,_that.phone,_that.name,_that.dairy,_that.image,_that.subscriptions,_that.collections,_that.expiryAt,_that.isPaused,_that.seSettings,_that.suSettings,_that.active,_that.createdAt);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -5696,10 +5702,10 @@ return $default(_that.id,_that.role,_that.sellerId,_that.supplierId,_that.phone,
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  Role role,  String? sellerId,  String? supplierId,  String phone,  String? name,  String? dairy,  String? image,  List<Subscription>? subscriptions,  List<Collection>? collections,  DateTime? expiryAt,  SellerSettings? seSettings,  SupplierSettings? suSettings,  bool active,  DateTime? createdAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  Role role,  String? sellerId,  String? supplierId,  String phone,  String? name,  String? dairy,  String? image,  List<Subscription>? subscriptions,  List<Collection>? collections,  DateTime? expiryAt,  bool isPaused,  SellerSettings? seSettings,  SupplierSettings? suSettings,  bool active,  DateTime? createdAt)?  $default,) {final _that = this;
 switch (_that) {
 case _UserInfo() when $default != null:
-return $default(_that.id,_that.role,_that.sellerId,_that.supplierId,_that.phone,_that.name,_that.dairy,_that.image,_that.subscriptions,_that.collections,_that.expiryAt,_that.seSettings,_that.suSettings,_that.active,_that.createdAt);case _:
+return $default(_that.id,_that.role,_that.sellerId,_that.supplierId,_that.phone,_that.name,_that.dairy,_that.image,_that.subscriptions,_that.collections,_that.expiryAt,_that.isPaused,_that.seSettings,_that.suSettings,_that.active,_that.createdAt);case _:
   return null;
 
 }
@@ -5711,7 +5717,7 @@ return $default(_that.id,_that.role,_that.sellerId,_that.supplierId,_that.phone,
 @JsonSerializable()
 
 class _UserInfo implements UserInfo {
-  const _UserInfo({required this.id, required this.role, this.sellerId, this.supplierId, required this.phone, this.name, this.dairy, this.image, final  List<Subscription>? subscriptions, final  List<Collection>? collections, this.expiryAt, this.seSettings, this.suSettings, required this.active, this.createdAt}): _subscriptions = subscriptions,_collections = collections;
+  const _UserInfo({required this.id, required this.role, this.sellerId, this.supplierId, required this.phone, this.name, this.dairy, this.image, final  List<Subscription>? subscriptions, final  List<Collection>? collections, this.expiryAt, this.isPaused = false, this.seSettings, this.suSettings, required this.active, this.createdAt}): _subscriptions = subscriptions,_collections = collections;
   factory _UserInfo.fromJson(Map<String, dynamic> json) => _$UserInfoFromJson(json);
 
 @override final  String id;
@@ -5742,6 +5748,7 @@ class _UserInfo implements UserInfo {
 }
 
 @override final  DateTime? expiryAt;
+@override@JsonKey() final  bool isPaused;
 @override final  SellerSettings? seSettings;
 @override final  SupplierSettings? suSettings;
 @override final  bool active;
@@ -5760,16 +5767,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserInfo&&(identical(other.id, id) || other.id == id)&&(identical(other.role, role) || other.role == role)&&(identical(other.sellerId, sellerId) || other.sellerId == sellerId)&&(identical(other.supplierId, supplierId) || other.supplierId == supplierId)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.name, name) || other.name == name)&&(identical(other.dairy, dairy) || other.dairy == dairy)&&(identical(other.image, image) || other.image == image)&&const DeepCollectionEquality().equals(other._subscriptions, _subscriptions)&&const DeepCollectionEquality().equals(other._collections, _collections)&&(identical(other.expiryAt, expiryAt) || other.expiryAt == expiryAt)&&(identical(other.seSettings, seSettings) || other.seSettings == seSettings)&&(identical(other.suSettings, suSettings) || other.suSettings == suSettings)&&(identical(other.active, active) || other.active == active)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserInfo&&(identical(other.id, id) || other.id == id)&&(identical(other.role, role) || other.role == role)&&(identical(other.sellerId, sellerId) || other.sellerId == sellerId)&&(identical(other.supplierId, supplierId) || other.supplierId == supplierId)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.name, name) || other.name == name)&&(identical(other.dairy, dairy) || other.dairy == dairy)&&(identical(other.image, image) || other.image == image)&&const DeepCollectionEquality().equals(other._subscriptions, _subscriptions)&&const DeepCollectionEquality().equals(other._collections, _collections)&&(identical(other.expiryAt, expiryAt) || other.expiryAt == expiryAt)&&(identical(other.isPaused, isPaused) || other.isPaused == isPaused)&&(identical(other.seSettings, seSettings) || other.seSettings == seSettings)&&(identical(other.suSettings, suSettings) || other.suSettings == suSettings)&&(identical(other.active, active) || other.active == active)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,role,sellerId,supplierId,phone,name,dairy,image,const DeepCollectionEquality().hash(_subscriptions),const DeepCollectionEquality().hash(_collections),expiryAt,seSettings,suSettings,active,createdAt);
+int get hashCode => Object.hash(runtimeType,id,role,sellerId,supplierId,phone,name,dairy,image,const DeepCollectionEquality().hash(_subscriptions),const DeepCollectionEquality().hash(_collections),expiryAt,isPaused,seSettings,suSettings,active,createdAt);
 
 @override
 String toString() {
-  return 'UserInfo(id: $id, role: $role, sellerId: $sellerId, supplierId: $supplierId, phone: $phone, name: $name, dairy: $dairy, image: $image, subscriptions: $subscriptions, collections: $collections, expiryAt: $expiryAt, seSettings: $seSettings, suSettings: $suSettings, active: $active, createdAt: $createdAt)';
+  return 'UserInfo(id: $id, role: $role, sellerId: $sellerId, supplierId: $supplierId, phone: $phone, name: $name, dairy: $dairy, image: $image, subscriptions: $subscriptions, collections: $collections, expiryAt: $expiryAt, isPaused: $isPaused, seSettings: $seSettings, suSettings: $suSettings, active: $active, createdAt: $createdAt)';
 }
 
 
@@ -5780,7 +5787,7 @@ abstract mixin class _$UserInfoCopyWith<$Res> implements $UserInfoCopyWith<$Res>
   factory _$UserInfoCopyWith(_UserInfo value, $Res Function(_UserInfo) _then) = __$UserInfoCopyWithImpl;
 @override @useResult
 $Res call({
- String id, Role role, String? sellerId, String? supplierId, String phone, String? name, String? dairy, String? image, List<Subscription>? subscriptions, List<Collection>? collections, DateTime? expiryAt, SellerSettings? seSettings, SupplierSettings? suSettings, bool active, DateTime? createdAt
+ String id, Role role, String? sellerId, String? supplierId, String phone, String? name, String? dairy, String? image, List<Subscription>? subscriptions, List<Collection>? collections, DateTime? expiryAt, bool isPaused, SellerSettings? seSettings, SupplierSettings? suSettings, bool active, DateTime? createdAt
 });
 
 
@@ -5797,7 +5804,7 @@ class __$UserInfoCopyWithImpl<$Res>
 
 /// Create a copy of UserInfo
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? role = null,Object? sellerId = freezed,Object? supplierId = freezed,Object? phone = null,Object? name = freezed,Object? dairy = freezed,Object? image = freezed,Object? subscriptions = freezed,Object? collections = freezed,Object? expiryAt = freezed,Object? seSettings = freezed,Object? suSettings = freezed,Object? active = null,Object? createdAt = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? role = null,Object? sellerId = freezed,Object? supplierId = freezed,Object? phone = null,Object? name = freezed,Object? dairy = freezed,Object? image = freezed,Object? subscriptions = freezed,Object? collections = freezed,Object? expiryAt = freezed,Object? isPaused = null,Object? seSettings = freezed,Object? suSettings = freezed,Object? active = null,Object? createdAt = freezed,}) {
   return _then(_UserInfo(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,role: null == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
@@ -5810,7 +5817,8 @@ as String?,image: freezed == image ? _self.image : image // ignore: cast_nullabl
 as String?,subscriptions: freezed == subscriptions ? _self._subscriptions : subscriptions // ignore: cast_nullable_to_non_nullable
 as List<Subscription>?,collections: freezed == collections ? _self._collections : collections // ignore: cast_nullable_to_non_nullable
 as List<Collection>?,expiryAt: freezed == expiryAt ? _self.expiryAt : expiryAt // ignore: cast_nullable_to_non_nullable
-as DateTime?,seSettings: freezed == seSettings ? _self.seSettings : seSettings // ignore: cast_nullable_to_non_nullable
+as DateTime?,isPaused: null == isPaused ? _self.isPaused : isPaused // ignore: cast_nullable_to_non_nullable
+as bool,seSettings: freezed == seSettings ? _self.seSettings : seSettings // ignore: cast_nullable_to_non_nullable
 as SellerSettings?,suSettings: freezed == suSettings ? _self.suSettings : suSettings // ignore: cast_nullable_to_non_nullable
 as SupplierSettings?,active: null == active ? _self.active : active // ignore: cast_nullable_to_non_nullable
 as bool,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
@@ -5849,7 +5857,7 @@ $SupplierSettingsCopyWith<$Res>? get suSettings {
 /// @nodoc
 mixin _$User {
 
-@JsonKey(name: '_id', includeIfNull: false) String? get id; Role get role; int get index; String? get sellerId; String? get supplierId; String? get fcmToken; String? get phone; String? get name; String? get dairy; String? get address; String? get state; String? get city; String? get image; List<Subscription>? get subscriptions; List<Collection>? get collections; DateTime? get expiryAt; SellerSettings? get seSettings; SupplierSettings? get suSettings; bool get active;@DateTimeConverter() DateTime get createdAt; DateTime? get updatedAt;
+@JsonKey(name: '_id', includeIfNull: false) String? get id; Role get role; int get index; String? get sellerId; String? get supplierId; String? get fcmToken; String? get phone; String? get name; String? get dairy; String? get address; String? get state; String? get city; String? get image; List<Subscription>? get subscriptions; List<Collection>? get collections; DateTime? get expiryAt; SellerSettings? get seSettings; SupplierSettings? get suSettings; bool get active; String? get upiId;@DateTimeConverter() DateTime get createdAt; DateTime? get updatedAt;
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -5862,16 +5870,16 @@ $UserCopyWith<User> get copyWith => _$UserCopyWithImpl<User>(this as User, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is User&&(identical(other.id, id) || other.id == id)&&(identical(other.role, role) || other.role == role)&&(identical(other.index, index) || other.index == index)&&(identical(other.sellerId, sellerId) || other.sellerId == sellerId)&&(identical(other.supplierId, supplierId) || other.supplierId == supplierId)&&(identical(other.fcmToken, fcmToken) || other.fcmToken == fcmToken)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.name, name) || other.name == name)&&(identical(other.dairy, dairy) || other.dairy == dairy)&&(identical(other.address, address) || other.address == address)&&(identical(other.state, state) || other.state == state)&&(identical(other.city, city) || other.city == city)&&(identical(other.image, image) || other.image == image)&&const DeepCollectionEquality().equals(other.subscriptions, subscriptions)&&const DeepCollectionEquality().equals(other.collections, collections)&&(identical(other.expiryAt, expiryAt) || other.expiryAt == expiryAt)&&(identical(other.seSettings, seSettings) || other.seSettings == seSettings)&&(identical(other.suSettings, suSettings) || other.suSettings == suSettings)&&(identical(other.active, active) || other.active == active)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is User&&(identical(other.id, id) || other.id == id)&&(identical(other.role, role) || other.role == role)&&(identical(other.index, index) || other.index == index)&&(identical(other.sellerId, sellerId) || other.sellerId == sellerId)&&(identical(other.supplierId, supplierId) || other.supplierId == supplierId)&&(identical(other.fcmToken, fcmToken) || other.fcmToken == fcmToken)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.name, name) || other.name == name)&&(identical(other.dairy, dairy) || other.dairy == dairy)&&(identical(other.address, address) || other.address == address)&&(identical(other.state, state) || other.state == state)&&(identical(other.city, city) || other.city == city)&&(identical(other.image, image) || other.image == image)&&const DeepCollectionEquality().equals(other.subscriptions, subscriptions)&&const DeepCollectionEquality().equals(other.collections, collections)&&(identical(other.expiryAt, expiryAt) || other.expiryAt == expiryAt)&&(identical(other.seSettings, seSettings) || other.seSettings == seSettings)&&(identical(other.suSettings, suSettings) || other.suSettings == suSettings)&&(identical(other.active, active) || other.active == active)&&(identical(other.upiId, upiId) || other.upiId == upiId)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,id,role,index,sellerId,supplierId,fcmToken,phone,name,dairy,address,state,city,image,const DeepCollectionEquality().hash(subscriptions),const DeepCollectionEquality().hash(collections),expiryAt,seSettings,suSettings,active,createdAt,updatedAt]);
+int get hashCode => Object.hashAll([runtimeType,id,role,index,sellerId,supplierId,fcmToken,phone,name,dairy,address,state,city,image,const DeepCollectionEquality().hash(subscriptions),const DeepCollectionEquality().hash(collections),expiryAt,seSettings,suSettings,active,upiId,createdAt,updatedAt]);
 
 @override
 String toString() {
-  return 'User(id: $id, role: $role, index: $index, sellerId: $sellerId, supplierId: $supplierId, fcmToken: $fcmToken, phone: $phone, name: $name, dairy: $dairy, address: $address, state: $state, city: $city, image: $image, subscriptions: $subscriptions, collections: $collections, expiryAt: $expiryAt, seSettings: $seSettings, suSettings: $suSettings, active: $active, createdAt: $createdAt, updatedAt: $updatedAt)';
+  return 'User(id: $id, role: $role, index: $index, sellerId: $sellerId, supplierId: $supplierId, fcmToken: $fcmToken, phone: $phone, name: $name, dairy: $dairy, address: $address, state: $state, city: $city, image: $image, subscriptions: $subscriptions, collections: $collections, expiryAt: $expiryAt, seSettings: $seSettings, suSettings: $suSettings, active: $active, upiId: $upiId, createdAt: $createdAt, updatedAt: $updatedAt)';
 }
 
 
@@ -5882,7 +5890,7 @@ abstract mixin class $UserCopyWith<$Res>  {
   factory $UserCopyWith(User value, $Res Function(User) _then) = _$UserCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: '_id', includeIfNull: false) String? id, Role role, int index, String? sellerId, String? supplierId, String? fcmToken, String? phone, String? name, String? dairy, String? address, String? state, String? city, String? image, List<Subscription>? subscriptions, List<Collection>? collections, DateTime? expiryAt, SellerSettings? seSettings, SupplierSettings? suSettings, bool active,@DateTimeConverter() DateTime createdAt, DateTime? updatedAt
+@JsonKey(name: '_id', includeIfNull: false) String? id, Role role, int index, String? sellerId, String? supplierId, String? fcmToken, String? phone, String? name, String? dairy, String? address, String? state, String? city, String? image, List<Subscription>? subscriptions, List<Collection>? collections, DateTime? expiryAt, SellerSettings? seSettings, SupplierSettings? suSettings, bool active, String? upiId,@DateTimeConverter() DateTime createdAt, DateTime? updatedAt
 });
 
 
@@ -5899,7 +5907,7 @@ class _$UserCopyWithImpl<$Res>
 
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? role = null,Object? index = null,Object? sellerId = freezed,Object? supplierId = freezed,Object? fcmToken = freezed,Object? phone = freezed,Object? name = freezed,Object? dairy = freezed,Object? address = freezed,Object? state = freezed,Object? city = freezed,Object? image = freezed,Object? subscriptions = freezed,Object? collections = freezed,Object? expiryAt = freezed,Object? seSettings = freezed,Object? suSettings = freezed,Object? active = null,Object? createdAt = null,Object? updatedAt = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? role = null,Object? index = null,Object? sellerId = freezed,Object? supplierId = freezed,Object? fcmToken = freezed,Object? phone = freezed,Object? name = freezed,Object? dairy = freezed,Object? address = freezed,Object? state = freezed,Object? city = freezed,Object? image = freezed,Object? subscriptions = freezed,Object? collections = freezed,Object? expiryAt = freezed,Object? seSettings = freezed,Object? suSettings = freezed,Object? active = null,Object? upiId = freezed,Object? createdAt = null,Object? updatedAt = freezed,}) {
   return _then(_self.copyWith(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String?,role: null == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
@@ -5920,7 +5928,8 @@ as List<Collection>?,expiryAt: freezed == expiryAt ? _self.expiryAt : expiryAt /
 as DateTime?,seSettings: freezed == seSettings ? _self.seSettings : seSettings // ignore: cast_nullable_to_non_nullable
 as SellerSettings?,suSettings: freezed == suSettings ? _self.suSettings : suSettings // ignore: cast_nullable_to_non_nullable
 as SupplierSettings?,active: null == active ? _self.active : active // ignore: cast_nullable_to_non_nullable
-as bool,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as bool,upiId: freezed == upiId ? _self.upiId : upiId // ignore: cast_nullable_to_non_nullable
+as String?,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,
   ));
@@ -6031,10 +6040,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  Role role,  int index,  String? sellerId,  String? supplierId,  String? fcmToken,  String? phone,  String? name,  String? dairy,  String? address,  String? state,  String? city,  String? image,  List<Subscription>? subscriptions,  List<Collection>? collections,  DateTime? expiryAt,  SellerSettings? seSettings,  SupplierSettings? suSettings,  bool active, @DateTimeConverter()  DateTime createdAt,  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  Role role,  int index,  String? sellerId,  String? supplierId,  String? fcmToken,  String? phone,  String? name,  String? dairy,  String? address,  String? state,  String? city,  String? image,  List<Subscription>? subscriptions,  List<Collection>? collections,  DateTime? expiryAt,  SellerSettings? seSettings,  SupplierSettings? suSettings,  bool active,  String? upiId, @DateTimeConverter()  DateTime createdAt,  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _User() when $default != null:
-return $default(_that.id,_that.role,_that.index,_that.sellerId,_that.supplierId,_that.fcmToken,_that.phone,_that.name,_that.dairy,_that.address,_that.state,_that.city,_that.image,_that.subscriptions,_that.collections,_that.expiryAt,_that.seSettings,_that.suSettings,_that.active,_that.createdAt,_that.updatedAt);case _:
+return $default(_that.id,_that.role,_that.index,_that.sellerId,_that.supplierId,_that.fcmToken,_that.phone,_that.name,_that.dairy,_that.address,_that.state,_that.city,_that.image,_that.subscriptions,_that.collections,_that.expiryAt,_that.seSettings,_that.suSettings,_that.active,_that.upiId,_that.createdAt,_that.updatedAt);case _:
   return orElse();
 
 }
@@ -6052,10 +6061,10 @@ return $default(_that.id,_that.role,_that.index,_that.sellerId,_that.supplierId,
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  Role role,  int index,  String? sellerId,  String? supplierId,  String? fcmToken,  String? phone,  String? name,  String? dairy,  String? address,  String? state,  String? city,  String? image,  List<Subscription>? subscriptions,  List<Collection>? collections,  DateTime? expiryAt,  SellerSettings? seSettings,  SupplierSettings? suSettings,  bool active, @DateTimeConverter()  DateTime createdAt,  DateTime? updatedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  Role role,  int index,  String? sellerId,  String? supplierId,  String? fcmToken,  String? phone,  String? name,  String? dairy,  String? address,  String? state,  String? city,  String? image,  List<Subscription>? subscriptions,  List<Collection>? collections,  DateTime? expiryAt,  SellerSettings? seSettings,  SupplierSettings? suSettings,  bool active,  String? upiId, @DateTimeConverter()  DateTime createdAt,  DateTime? updatedAt)  $default,) {final _that = this;
 switch (_that) {
 case _User():
-return $default(_that.id,_that.role,_that.index,_that.sellerId,_that.supplierId,_that.fcmToken,_that.phone,_that.name,_that.dairy,_that.address,_that.state,_that.city,_that.image,_that.subscriptions,_that.collections,_that.expiryAt,_that.seSettings,_that.suSettings,_that.active,_that.createdAt,_that.updatedAt);case _:
+return $default(_that.id,_that.role,_that.index,_that.sellerId,_that.supplierId,_that.fcmToken,_that.phone,_that.name,_that.dairy,_that.address,_that.state,_that.city,_that.image,_that.subscriptions,_that.collections,_that.expiryAt,_that.seSettings,_that.suSettings,_that.active,_that.upiId,_that.createdAt,_that.updatedAt);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -6072,10 +6081,10 @@ return $default(_that.id,_that.role,_that.index,_that.sellerId,_that.supplierId,
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  Role role,  int index,  String? sellerId,  String? supplierId,  String? fcmToken,  String? phone,  String? name,  String? dairy,  String? address,  String? state,  String? city,  String? image,  List<Subscription>? subscriptions,  List<Collection>? collections,  DateTime? expiryAt,  SellerSettings? seSettings,  SupplierSettings? suSettings,  bool active, @DateTimeConverter()  DateTime createdAt,  DateTime? updatedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: '_id', includeIfNull: false)  String? id,  Role role,  int index,  String? sellerId,  String? supplierId,  String? fcmToken,  String? phone,  String? name,  String? dairy,  String? address,  String? state,  String? city,  String? image,  List<Subscription>? subscriptions,  List<Collection>? collections,  DateTime? expiryAt,  SellerSettings? seSettings,  SupplierSettings? suSettings,  bool active,  String? upiId, @DateTimeConverter()  DateTime createdAt,  DateTime? updatedAt)?  $default,) {final _that = this;
 switch (_that) {
 case _User() when $default != null:
-return $default(_that.id,_that.role,_that.index,_that.sellerId,_that.supplierId,_that.fcmToken,_that.phone,_that.name,_that.dairy,_that.address,_that.state,_that.city,_that.image,_that.subscriptions,_that.collections,_that.expiryAt,_that.seSettings,_that.suSettings,_that.active,_that.createdAt,_that.updatedAt);case _:
+return $default(_that.id,_that.role,_that.index,_that.sellerId,_that.supplierId,_that.fcmToken,_that.phone,_that.name,_that.dairy,_that.address,_that.state,_that.city,_that.image,_that.subscriptions,_that.collections,_that.expiryAt,_that.seSettings,_that.suSettings,_that.active,_that.upiId,_that.createdAt,_that.updatedAt);case _:
   return null;
 
 }
@@ -6087,7 +6096,7 @@ return $default(_that.id,_that.role,_that.index,_that.sellerId,_that.supplierId,
 @JsonSerializable()
 
 class _User implements User {
-  const _User({@JsonKey(name: '_id', includeIfNull: false) this.id, required this.role, required this.index, this.sellerId, this.supplierId, this.fcmToken, this.phone, this.name, this.dairy, this.address, this.state, this.city, this.image, final  List<Subscription>? subscriptions, final  List<Collection>? collections, this.expiryAt, this.seSettings, this.suSettings, this.active = true, @DateTimeConverter() required this.createdAt, this.updatedAt}): _subscriptions = subscriptions,_collections = collections;
+  const _User({@JsonKey(name: '_id', includeIfNull: false) this.id, required this.role, required this.index, this.sellerId, this.supplierId, this.fcmToken, this.phone, this.name, this.dairy, this.address, this.state, this.city, this.image, final  List<Subscription>? subscriptions, final  List<Collection>? collections, this.expiryAt, this.seSettings, this.suSettings, this.active = true, this.upiId, @DateTimeConverter() required this.createdAt, this.updatedAt}): _subscriptions = subscriptions,_collections = collections;
   factory _User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
 @override@JsonKey(name: '_id', includeIfNull: false) final  String? id;
@@ -6125,6 +6134,7 @@ class _User implements User {
 @override final  SellerSettings? seSettings;
 @override final  SupplierSettings? suSettings;
 @override@JsonKey() final  bool active;
+@override final  String? upiId;
 @override@DateTimeConverter() final  DateTime createdAt;
 @override final  DateTime? updatedAt;
 
@@ -6141,16 +6151,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _User&&(identical(other.id, id) || other.id == id)&&(identical(other.role, role) || other.role == role)&&(identical(other.index, index) || other.index == index)&&(identical(other.sellerId, sellerId) || other.sellerId == sellerId)&&(identical(other.supplierId, supplierId) || other.supplierId == supplierId)&&(identical(other.fcmToken, fcmToken) || other.fcmToken == fcmToken)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.name, name) || other.name == name)&&(identical(other.dairy, dairy) || other.dairy == dairy)&&(identical(other.address, address) || other.address == address)&&(identical(other.state, state) || other.state == state)&&(identical(other.city, city) || other.city == city)&&(identical(other.image, image) || other.image == image)&&const DeepCollectionEquality().equals(other._subscriptions, _subscriptions)&&const DeepCollectionEquality().equals(other._collections, _collections)&&(identical(other.expiryAt, expiryAt) || other.expiryAt == expiryAt)&&(identical(other.seSettings, seSettings) || other.seSettings == seSettings)&&(identical(other.suSettings, suSettings) || other.suSettings == suSettings)&&(identical(other.active, active) || other.active == active)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _User&&(identical(other.id, id) || other.id == id)&&(identical(other.role, role) || other.role == role)&&(identical(other.index, index) || other.index == index)&&(identical(other.sellerId, sellerId) || other.sellerId == sellerId)&&(identical(other.supplierId, supplierId) || other.supplierId == supplierId)&&(identical(other.fcmToken, fcmToken) || other.fcmToken == fcmToken)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.name, name) || other.name == name)&&(identical(other.dairy, dairy) || other.dairy == dairy)&&(identical(other.address, address) || other.address == address)&&(identical(other.state, state) || other.state == state)&&(identical(other.city, city) || other.city == city)&&(identical(other.image, image) || other.image == image)&&const DeepCollectionEquality().equals(other._subscriptions, _subscriptions)&&const DeepCollectionEquality().equals(other._collections, _collections)&&(identical(other.expiryAt, expiryAt) || other.expiryAt == expiryAt)&&(identical(other.seSettings, seSettings) || other.seSettings == seSettings)&&(identical(other.suSettings, suSettings) || other.suSettings == suSettings)&&(identical(other.active, active) || other.active == active)&&(identical(other.upiId, upiId) || other.upiId == upiId)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,id,role,index,sellerId,supplierId,fcmToken,phone,name,dairy,address,state,city,image,const DeepCollectionEquality().hash(_subscriptions),const DeepCollectionEquality().hash(_collections),expiryAt,seSettings,suSettings,active,createdAt,updatedAt]);
+int get hashCode => Object.hashAll([runtimeType,id,role,index,sellerId,supplierId,fcmToken,phone,name,dairy,address,state,city,image,const DeepCollectionEquality().hash(_subscriptions),const DeepCollectionEquality().hash(_collections),expiryAt,seSettings,suSettings,active,upiId,createdAt,updatedAt]);
 
 @override
 String toString() {
-  return 'User(id: $id, role: $role, index: $index, sellerId: $sellerId, supplierId: $supplierId, fcmToken: $fcmToken, phone: $phone, name: $name, dairy: $dairy, address: $address, state: $state, city: $city, image: $image, subscriptions: $subscriptions, collections: $collections, expiryAt: $expiryAt, seSettings: $seSettings, suSettings: $suSettings, active: $active, createdAt: $createdAt, updatedAt: $updatedAt)';
+  return 'User(id: $id, role: $role, index: $index, sellerId: $sellerId, supplierId: $supplierId, fcmToken: $fcmToken, phone: $phone, name: $name, dairy: $dairy, address: $address, state: $state, city: $city, image: $image, subscriptions: $subscriptions, collections: $collections, expiryAt: $expiryAt, seSettings: $seSettings, suSettings: $suSettings, active: $active, upiId: $upiId, createdAt: $createdAt, updatedAt: $updatedAt)';
 }
 
 
@@ -6161,7 +6171,7 @@ abstract mixin class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$UserCopyWith(_User value, $Res Function(_User) _then) = __$UserCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: '_id', includeIfNull: false) String? id, Role role, int index, String? sellerId, String? supplierId, String? fcmToken, String? phone, String? name, String? dairy, String? address, String? state, String? city, String? image, List<Subscription>? subscriptions, List<Collection>? collections, DateTime? expiryAt, SellerSettings? seSettings, SupplierSettings? suSettings, bool active,@DateTimeConverter() DateTime createdAt, DateTime? updatedAt
+@JsonKey(name: '_id', includeIfNull: false) String? id, Role role, int index, String? sellerId, String? supplierId, String? fcmToken, String? phone, String? name, String? dairy, String? address, String? state, String? city, String? image, List<Subscription>? subscriptions, List<Collection>? collections, DateTime? expiryAt, SellerSettings? seSettings, SupplierSettings? suSettings, bool active, String? upiId,@DateTimeConverter() DateTime createdAt, DateTime? updatedAt
 });
 
 
@@ -6178,7 +6188,7 @@ class __$UserCopyWithImpl<$Res>
 
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? role = null,Object? index = null,Object? sellerId = freezed,Object? supplierId = freezed,Object? fcmToken = freezed,Object? phone = freezed,Object? name = freezed,Object? dairy = freezed,Object? address = freezed,Object? state = freezed,Object? city = freezed,Object? image = freezed,Object? subscriptions = freezed,Object? collections = freezed,Object? expiryAt = freezed,Object? seSettings = freezed,Object? suSettings = freezed,Object? active = null,Object? createdAt = null,Object? updatedAt = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? role = null,Object? index = null,Object? sellerId = freezed,Object? supplierId = freezed,Object? fcmToken = freezed,Object? phone = freezed,Object? name = freezed,Object? dairy = freezed,Object? address = freezed,Object? state = freezed,Object? city = freezed,Object? image = freezed,Object? subscriptions = freezed,Object? collections = freezed,Object? expiryAt = freezed,Object? seSettings = freezed,Object? suSettings = freezed,Object? active = null,Object? upiId = freezed,Object? createdAt = null,Object? updatedAt = freezed,}) {
   return _then(_User(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String?,role: null == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
@@ -6199,7 +6209,8 @@ as List<Collection>?,expiryAt: freezed == expiryAt ? _self.expiryAt : expiryAt /
 as DateTime?,seSettings: freezed == seSettings ? _self.seSettings : seSettings // ignore: cast_nullable_to_non_nullable
 as SellerSettings?,suSettings: freezed == suSettings ? _self.suSettings : suSettings // ignore: cast_nullable_to_non_nullable
 as SupplierSettings?,active: null == active ? _self.active : active // ignore: cast_nullable_to_non_nullable
-as bool,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as bool,upiId: freezed == upiId ? _self.upiId : upiId // ignore: cast_nullable_to_non_nullable
+as String?,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,
   ));

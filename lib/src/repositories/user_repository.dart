@@ -16,6 +16,9 @@ abstract class UserRepository {
   @PATCH('/users/{id}')
   Future<User> edit(@Path('id') String id, @Body() User user);
 
+  @DELETE('/users/{id}')
+  Future<void> delete(@Path('id') String id);
+
   @GET('/users/{id}')
   Future<User?> get(@Path('id') String id);
 
@@ -31,7 +34,7 @@ abstract class UserRepository {
   Future<List<User>> listCustomers(@Query('sellerId') String sellerId);
 
   @POST('/users/bulk-update-indexes')
-  Future<dynamic> bulkUpdateIndexes(@Body() List<IndexUpdate> updates); // Node.js returns a bulk result summary
+  Future<dynamic> bulkUpdateIndexes(@Body() List<IndexUpdate> updates);
 
   @PATCH('/users/bulk-update-supplier-index')
   Future<List<User>> updateIndexAndSupplierId(@Body() List<User> users);

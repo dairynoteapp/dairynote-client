@@ -13,6 +13,9 @@ abstract class SaleRepository {
   @POST('/sales')
   Future<Sale> write(@Body() Sale sale);
 
+  @DELETE('/sales/{id}')
+  Future<void> delete(@Path('id') String id);
+
   @GET('/sales')
   Future<List<Sale>> list({
     @Query('sellerId') required String sellerId,
